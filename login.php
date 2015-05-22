@@ -60,7 +60,7 @@
             <form action="checklogin.php" class="form-horizontal" method="post" id="register-form"> 
                 <legend>Iniciar Sesión</legend>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <label for="inputEmail" class="col-lg-2 control-label">Email o Username</label>
                     <div class="col-lg-10">
                         <input class="form-control" type="text" name="email" placeholder="mi@correo.com.ar">
                     </div>

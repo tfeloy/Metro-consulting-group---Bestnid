@@ -59,13 +59,7 @@
 				?>
 				<div class="row">
 		            <div class="col-lg-4">
-		            	
-		            </div>
-		            <div class="col-lg-4">
-		            
-		            </div>
-		            <div class="col-lg-4">
-		            
+						<a href="registroadmin.php" class="btn btn-primary">Agregar Administrador</a>
 		            </div>
 		        </div>
 				<?php

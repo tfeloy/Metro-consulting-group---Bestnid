@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.php">Bestnid</a>
+            <a class="navbar-brand" href="index.php">Bestnid</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse"> 
             <ul class="nav navbar-nav navbar-right">
@@ -61,13 +61,29 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
-            
+                <?php
+                    $query = 'SELECT id, nombre FROM categorias';
+                    $result = mysqli_query($con,$query);
+                    if (mysqli_num_rows($result) > 0)                           
+                    {                               
+                        echo '<div class="list-group">';                                                             
+                        while ($row_cat = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
+                        {
+                            $verCat = 'categoria.php?id='.$row_cat['id'];
+                            echo '<a href="'.$verCat.'" class="list-group-item">'.utf8_encode($row_cat['nombre']).'</a>';
+                        }
+                        echo "</div>";
+                    }
+                    mysqli_free_result($result);
+                ?>
             </div>
-            <div class="col-lg-4">
-            
-            </div>
-            <div class="col-lg-4">
-            
+            <div class="col-lg-8">
+                
+
+
+
+                
+                                    
             </div>
         </div>
     </div>

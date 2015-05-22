@@ -3,7 +3,8 @@
 	$con = Conectarse();	
 	session_start();	
 
-    $sqlLogin = 'SELECT id, nombre, apellido, username, email, telefono, fecha_nac, sexo, nro_tarjeta, es_admin, fecha_registro FROM users WHERE email = "'.$_POST['email'].'" and password = "'.md5($_POST['password']).'"  LIMIT 1';
+	/* Se puede hacer login mediante el email o el username */
+    $sqlLogin = 'SELECT id, nombre, apellido, username, email, telefono, fecha_nac, sexo, nro_tarjeta, es_admin, fecha_registro FROM users WHERE (email = "'.$_POST['email'].'" or username = "'.$_POST['email'].'") and password = "'.md5($_POST['password']).'"  LIMIT 1';
 	$resultLogin = mysqli_query($con,$sqlLogin);
 	$row = mysqli_fetch_row($resultLogin);
 	$login_ok = false; 

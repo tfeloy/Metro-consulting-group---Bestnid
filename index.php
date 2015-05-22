@@ -61,6 +61,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
+                <h3>Categorias</h3>
                 <?php
                     $query = 'SELECT id, nombre FROM categorias';
                     $result = mysqli_query($con,$query);
@@ -78,12 +79,53 @@
                 ?>
             </div>
             <div class="col-lg-8">
-                
-
-
-
-                
-                                    
+                <h3>Publicaciones Destacadas</h3>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Publicación</h4>
+                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
+                                <center>
+                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Publicación</h4>
+                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
+                                <center>
+                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Publicación</h4>
+                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
+                                <center>
+                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4>Publicación</h4>
+                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
+                                <center>
+                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>                  
             </div>
         </div>
     </div>

@@ -1,8 +1,16 @@
+.post-img img, .post-img iframe {
+  width: 100%;
+  display: block;
+  border: none;
+}
+
+
+/*
+
+
 .pad {
 	padding-top: 5px !important;
 }
-
-/* Toggle Styles */
 
 #wrapper {
     padding-left: 0;
@@ -45,7 +53,7 @@
     margin-right: -250px;
 }
 
-/* Sidebar Styles */
+// Sidebar Styles 
 
 .sidebar-nav {
     position: absolute;
@@ -136,3 +144,5 @@ border: 0;
 min-width: 0;
 
 }
+
+*/

@@ -95,8 +95,8 @@
                                
                                 $pub = '<h4>'.$row['titulo'].'</4>';
                                 $pub .= '<a href=""><img alt="" class="img-responsive" src="uploads/default-image.png"></a>';
-                                $pub .= '<p>'.$row['descripcion'].'</p>';
-                                $pub .= '<span style="text-align:left">Activo hasta: '.$row['vigencia'].'</span><br><span style="text-align:right">Categ: '.utf8_encode($row['catName']).'</span>';
+                                $pub .= 'Descripción<p style="background-color: lightgrey;border-radius: 3px;text-align: justify;">'.$row['descripcion'].'</p>';
+                                $pub .= '<p>Activo hasta: <span style="float:right; color: green;">'.$row['vigencia'].'</span><br>Categ:<span style="float:right; color: red;"> '.utf8_encode($row['catName']).'</span></p>';
                                   
                                 $estruc .= $pub;
                                 $estruc .= '</div></div></div>';

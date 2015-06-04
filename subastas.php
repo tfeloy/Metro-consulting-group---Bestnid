@@ -60,57 +60,81 @@
             <p>Donde todo lo que necesitas lo podes encontrar solo acá</p>
         </div>
         <div class="row">
-            <div class="col-lg-4">
-                <h3>Categorias</h3>
+            <div class="col-lg-12">
                 <?php
-                    $query = 'SELECT id, nombre FROM categorias';
+
+                    $query = 'SELECT p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
+                    if(isset($_GET['id']))
+                    {
+                        $query .= ' AND p.id_categoria = '.$_GET['id'];
+                    }
+                    if(isset($_POST['search']))
+                    {
+                        $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%")';
+                    }
+
                     $result = mysqli_query($con,$query);
                     if (mysqli_num_rows($result) > 0)                           
-                    {                               
-                        echo '<div class="list-group">';                                                             
-                        while ($row_cat = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
+                    {                                
+                        echo '<table class="table table-striped table-hover ">
+                              <thead>
+                                <tr>
+                                  <th>Titulo</th>
+                                  <th>Descripción</th>
+                                  <th>Vigencia</th>
+                                  <th>Categoria</th>
+                                </tr>
+                              </thead>
+                              <tbody>';                                                             
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
                         {
-                            $verCat = 'categoria.php?id='.$row_cat['id'];
-                            echo '<a href="'.$verCat.'" class="list-group-item">'.utf8_encode($row_cat['nombre']).'</a>';
+                            $verCat = 'categoria.php?id='.$row['id'];
+                            echo '<tr>
+                                    <td>'.utf8_encode($row['titulo']).'</td>
+                                    <td>'.utf8_encode($row['descripcion']).'</td>
+                                    <td>'.utf8_encode($row['vigencia']).'</td>
+                                    <td>'.utf8_encode($row['catName']).'</td>
+                                  </tr>';
                         }
-                        echo "</div>";
+                        echo "</tbody></table> ";
+                    }
+                    else
+                    {
+                        echo "<h3>No hay resultados para mostrar.</h3>";
                     }
                     mysqli_free_result($result);
+
+
+                    /*
+                    $query = 'SELECT p.titulo, p.descripcion, p.imagen, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
+                    //$query = 'SELECT * FROM productos';
+                    $result = $con->query($query);
+                    
+                    if($result->num_rows > 0)
+                    {
+
+                        while($row = $result->fetch_array(MYSQLI_ASSOC))
+                        {
+                            $estruc = '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body">';
+                           
+                            $pub = '<h4>'.$row['titulo'].'</4>';
+                            $pub .= '<a href=""><img alt="" class="img-responsive" src="uploads/default-image.png"></a>';
+                            $pub .= 'Descripción<p style="background-color: lightgrey;border-radius: 3px;text-align: justify;">'.$row['descripcion'].'</p>';
+                            $pub .= '<p>Activo hasta: <span style="float:right; color: green;">'.$row['vigencia'].'</span><br>Categ:<span style="float:right; color: red;"> '.utf8_encode($row['catName']).'</span></p>';
+                              
+                            $estruc .= $pub;
+                            $estruc .= '</div></div></div>';
+                           
+                            echo $estruc;
+                        } 
+                    }
+                    else
+                    {
+                        echo "<h3>No hay resultados para mostrar.</h3>";
+                    }
+                    */
+
                 ?>
-            </div>
-            <div class="col-lg-8">
-                <h3>Resultados de la búsqueda</h3>
-                <div class="row">
-                    <?php
-                        $query = 'SELECT p.titulo, p.descripcion, p.imagen, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
-                        //$query = 'SELECT * FROM productos';
-                        $result = $con->query($query);
-                        
-                        if($result->num_rows > 0)
-                        {
-
-                            while($row = $result->fetch_array(MYSQLI_ASSOC))
-                            {
-                                $estruc = '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body">';
-                               
-                                $pub = '<h4>'.$row['titulo'].'</4>';
-                                $pub .= '<a href=""><img alt="" class="img-responsive" src="uploads/default-image.png"></a>';
-                                $pub .= 'Descripción<p style="background-color: lightgrey;border-radius: 3px;text-align: justify;">'.$row['descripcion'].'</p>';
-                                $pub .= '<p>Activo hasta: <span style="float:right; color: green;">'.$row['vigencia'].'</span><br>Categ:<span style="float:right; color: red;"> '.utf8_encode($row['catName']).'</span></p>';
-                                  
-                                $estruc .= $pub;
-                                $estruc .= '</div></div></div>';
-                               
-                                echo $estruc;
-                            } 
-                        }
-                        else
-                        {
-                            echo "<h3>No hay resultados para mostrar.</h3>";
-                        }
-
-                    ?>
-                </div>                  
             </div>
         </div>
     </div>

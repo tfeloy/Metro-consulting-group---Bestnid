@@ -60,6 +60,18 @@
             <p>Donde todo lo que necesitas lo podes encontrar solo acá</p>
         </div>
         <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <form action="subastas.php" class="form-horizontal" method="POST">
+                    <div class="input-group">
+                        <input class="form-control" name="search" id="search" type="text">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="submit()"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>        
+        <div class="row">
             <div class="col-lg-4">
                 <h3>Categorias</h3>
                 <?php
@@ -70,7 +82,7 @@
                         echo '<div class="list-group">';                                                             
                         while ($row_cat = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
                         {
-                            $verCat = 'categoria.php?id='.$row_cat['id'];
+                            $verCat = 'subastas.php?id='.$row_cat['id'];
                             echo '<a href="'.$verCat.'" class="list-group-item">'.utf8_encode($row_cat['nombre']).'</a>';
                         }
                         echo "</div>";
@@ -87,7 +99,7 @@
                                 <h4>Publicación</h4>
                                 <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
                                 <center>
-                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
                                 </center>
                             </div>
                         </div>
@@ -98,7 +110,7 @@
                                 <h4>Publicación</h4>
                                 <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
                                 <center>
-                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
                                 </center>
                             </div>
                         </div>
@@ -109,7 +121,7 @@
                                 <h4>Publicación</h4>
                                 <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
                                 <center>
-                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
                                 </center>
                             </div>
                         </div>
@@ -120,7 +132,7 @@
                                 <h4>Publicación</h4>
                                 <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
                                 <center>
-                                    <a href="#" class="btn btn-primary">Ver Publicación</a>
+                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
                                 </center>
                             </div>
                         </div>
@@ -129,5 +141,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $("[data-toggle=popover]").popover();
+    </script>
 </body>
 </html>

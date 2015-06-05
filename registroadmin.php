@@ -10,38 +10,11 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico" />
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/font-awesome.css" rel="stylesheet">
-    <link href="assets/css/ui-darkness/jquery-ui-1.8.21.custom.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/jquery-ui-1.8.21.custom.min.js"></script>
     <script src="assets/js/jquery.validate.js"></script>
     <script src="assets/js/validate.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-
-    <script>
-      $(function() {
-        $( "#fecha_nac" ).datepicker({
-          changeMonth: true,
-          changeYear: true,
-          dateFormat: 'yy/mm/dd',
-          closeText: 'Cerrar',
-          prevText: '',
-          nextText: '',
-          currentText: 'Hoy',
-          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-          'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-          monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
-          'Jul','Ago','Sep','Oct','Nov','Dic'],
-          dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
-          dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
-          dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
-          weekHeader: 'Sm',
-          firstDay: 1,
-          isRTL: false,
-          showMonthAfterYear: false,
-          yearSuffix: ''
-        });
-      });
-    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -81,7 +54,7 @@
     </div>
     <div class="container">    
         <div class="jumbotron">
-            <form action="savedregistro.php" class="form-horizontal" method="post" id="register-form"> 
+            <form action="savedregistro.php" class="form-horizontal" method="post" id="registeradmin-form"> 
                 <legend>Registro de Usuario</legend>
                 <div class="form-group">
                     <label for="inputNombre" class="col-lg-2 control-label">Nombre</label>
@@ -122,7 +95,17 @@
                 <div class="form-group">
                     <label for="inputFechaNac" class="col-lg-2 control-label">Fecha Nacimiento</label>
                     <div class="col-lg-10">
-                        <input class="form-control fecha_nac" type="text" name="fecha_nac" id="fecha_nac" placeholder="AAAA/MM/DD">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <input class="form-control" type="dia" name="dia" placeholder="Día">
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" type="mes" name="mes" placeholder="Mes">
+                            </div>
+                            <div class="col-xs-6">
+                                <input class="form-control" type="ano" name="ano" placeholder="Año">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -138,7 +121,14 @@
                 <div class="form-group">
                     <label for="inputNroTarjeta" class="col-lg-2 control-label">Nº Tarjeta</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="nro_tarjeta" placeholder="676988007">
+                        <input class="form-control" type="text" name="nro_tarjeta" placeholder="1243568790094578">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAdmin" class="col-lg-2 control-label">¿Es Administrador?</label>
+                    <div class="col-lg-10">
+                        <input type="checkbox" name="es_admin" value="1">
                     </div>
                 </div>
 
@@ -157,9 +147,6 @@
                         unset($_SESSION['reg']); //Elimino la variable de session luego de imprimirla
                     }
                 ?>
-
-                <input class="form-control" type="hidden" name="es_admin" value="1">
-
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <input type="submit" class="btn btn-success" value="Registrarse" /> 

@@ -32,10 +32,11 @@
 
 	// Security 
     $password = md5($_POST['password']); 
+    $fecha_nacimiento = $_POST['ano'].'-'.$_POST['mes'].'-'.$_POST['dia'];
 
 	/* Guardo luego de pasar todas las validaciones */
 	$sql = 'INSERT INTO users (nombre, apellido, username, password, email, telefono, fecha_nac, sexo, nro_tarjeta, es_admin, fecha_registro) ';
-	$sql .= 'VALUES("'.$_POST['nombre'].'","'.$_POST['apellido'].'","'.$_POST['username'].'","'.$password.'","'.$_POST['email'].'","'.$_POST['telefono'].'","'.$_POST['fecha_nac'].'","'.$_POST['sexo'].'","'.$_POST['nro_tarjeta'].'","'.$_POST['es_admin'].'","'.$dia_actual.'")';
+	$sql .= 'VALUES("'.$_POST['nombre'].'","'.$_POST['apellido'].'","'.$_POST['username'].'","'.$password.'","'.$_POST['email'].'","'.$_POST['telefono'].'","'.$fecha_nacimiento.'","'.$_POST['sexo'].'","'.$_POST['nro_tarjeta'].'","'.$_POST['es_admin'].'","'.$dia_actual.'")';
 	$result = mysqli_query($con,$sql);
 
 	if(!$result)

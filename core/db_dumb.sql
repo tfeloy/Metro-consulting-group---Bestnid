@@ -68,7 +68,22 @@ INSERT INTO `productos` (`id`, `id_categoria`, `id_vendedor`, `titulo`, `descrip
 (1, 3, 2, 'Increible camara Canon', 'Increible camara Canon, no te pierdas esta oportunidad', 'canon.jpg', NULL, '2015-06-03 00:00:00', '2015-07-30 00:00:00', 1, 0, NULL),
 (2, 6, 2, 'Teclado inalambrico Logitech', 'Teclado inalambrico Logitech con sorpresa de regalo', 'teclado.jpg', NULL, '2015-06-04 00:00:00', '2015-06-30 00:00:00', 1, 0, NULL),
 (3, 9, 2, 'Remera de Messi', 'Remera de messi transpirada por el no el hermano', 'messi.jpg', NULL, '2015-06-04 00:00:00', '2015-07-22 00:00:00', 1, 0, NULL),
-(4, 8, 2, 'Rutini wine', 'Rutini wine Malbec', 'rutini.jpg', NULL, '2015-06-10 00:00:00', '2015-06-24 00:00:00', 1, 0, NULL);
+(4, 8, 2, 'Rutini wine', 'Rutini wine Malbec', 'rutini.jpg', NULL, '2015-06-10 00:00:00', '2015-06-24 00:00:00', 1, 0, NULL),
+(5, 1, 3, 'Balanza Antiguas 2 Platos', 'HERMOSA BALANZA ANTIGUA ESPECIAL PARA DECORACIÓN NO TE LA PIERDAS\r\nESTRUCTURA DE FUNDICIÓN:\r\nANCHO MÁXIMO 70 cm.\r\nBASE 52 x 13 cm.\r\nALTURA 24 cm.\r\nPLATOSDE BRONCE 29 cm. ', 'balanza.jpg', NULL, '2015-06-05 00:00:00', '2015-07-31 00:00:00', 1, 0, NULL),
+(6, 2, 2, 'Resina Poliester Cristal', 'Precio por 1kg. Resina poliester cristal preacelerada. Catalizador incluido en el precio . \r\nEXCELENTE CALIDAD PARA TODOS SUS TRABAJOS. LO ASESORAMOS ANTES Y DESPUÉS DE SU COMPRA PARA QUE SU TRABAJO SALGA PERFECTAMENTE.', 'resina.jpg', NULL, '2015-06-05 00:00:00', '2015-06-30 00:00:00', 1, 0, NULL),
+(7, 4, 3, 'Celular Libre Lg G3 D690 Quad Core 5,5 Pulgadas', 'Celular LG G3 Stylus D690 Quad Core 8 Mp Wifi Libre Garantia', 'lg.jpg', NULL, '2015-06-05 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(8, 5, 3, 'Muñeco Buzz Lightyear', 'Muñeco Buzz Lightyear Camina, Sonido Y Luces - Toy Story 4', 'toy.jpg', NULL, '2015-06-03 00:00:00', '2015-07-30 00:00:00', 1, 0, NULL),
+(9, 7, 4, 'Nintendo Nes Action Set Igual A Nuevo!!', 'Consola Nintendo Nes en excelente estado! Las fotos hablan solas\r\nSe entrega con la caja original con todo lo que incluía de nuevo.\r\nLo entrego con juego Mario bros y duck hunt', 'nintendo.jpg', NULL, '2015-06-05 00:00:00', '2015-07-28 00:00:00', 1, 0, NULL),
+(10, 10, 4, 'Amazon Kindle Touch 7 Gen 2015', 'Amazon Kindle Touch 7 Gen 2015 Modelo Nuevo Recien Lanzado', 'kindle.jpg', NULL, '2015-06-02 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(11, 11, 2, 'Entrada Roger Waters River Plate 2007', 'ROGER WATERS - THE DARK SIDE OF THE MOON\r\nPARA COLECCIONISTAS - EN MUY BUEN ESTADO\r\nDOMINGO 18 DE MARZO DE 2007 - ESTADIO RIVER PLATE', 'roger.jpg', NULL, '2015-06-03 00:00:00', '2015-07-14 00:00:00', 1, 0, NULL),
+(12, 12, 3, 'Puerta De Exterior Doble', 'PUERTA DE EXTERIOR DOBLE HOJA \r\nSOMOS FABRICANTES\r\nLAS PUERTAS DOBLES Y LAS PUERTAS Y MEDIA TIENEN EL MISMO PRECIO', 'puerta.jpg', NULL, '2015-06-03 00:00:00', '2015-07-28 00:00:00', 1, 0, NULL),
+(13, 13, 5, 'Guitarra Criolla', 'Guitarra Criolla / Clasica Fonseca 31p', 'guitarra.jpg', NULL, '2015-06-04 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(14, 13, 5, 'Reloj De Bolsillo', 'Reloj De Bolsillo Automático Skeleton Con Tapa', 'reloj.jpg', NULL, '2015-06-01 00:00:00', '2015-07-28 00:00:00', 1, 0, NULL),
+(15, 15, 2, 'Mini Truck Rc Camioneta 4x4', 'Mini Truck Rc Camioneta 4x4 a radio control, ideal para los mas chiquitos.', 'camioneta.jpg', NULL, '2015-06-01 00:00:00', '2015-07-22 00:00:00', 1, 0, NULL),
+(16, 16, 3, 'Mi Primer Balance - Flavio A. Mantovan', 'nmersa en las cualidades características de nuestra Colección, la obra está destinada principalmente al profesional que debe elaborar su primer conjunto de estados contables; no solo a quien trabaja dentro del ente, sino al que lo asiste en forma independiente desde su estudio.', 'libro.jpg', NULL, '2015-06-02 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(17, 17, 3, 'Pink Floyd The Dark Side Of The Moon', 'PINK FLOYD \r\n"The Dark Side of The Moon"\r\n2 Cd''s\r\nExperience Version\r\nDigital Remaster 2011\r\nEdición Nacional\r\nNUEVO Y CERRADO', 'pinkfloyd.jpg', NULL, '2015-06-04 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(18, 18, 4, 'Vestido Importado', 'Vestido Importado De Fiesta De Encaje Elastizado - Noche', 'vestido.jpg', NULL, '2015-06-01 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
+(19, 19, 5, 'Combo Cinta Engomada', 'Combo Cinta Engomada X 2 + Pigmento Al Alcohol Para Goma Eva', 'cinta.jpg', NULL, '2015-06-02 00:00:00', '2015-07-30 00:00:00', 1, 0, NULL);
 
 CREATE TABLE ofertas_realizadas (
   `id_usuario` int(11) NOT NULL,

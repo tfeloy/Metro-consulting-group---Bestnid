@@ -10,6 +10,7 @@
     <title>Bestnid</title>
     <meta name="author" content="https://github.com/tfeloy/Metro-consulting-group---Bestnid/wiki">
     <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
@@ -93,54 +94,33 @@
             <div class="col-lg-8">
                 <h3>Publicaciones Destacadas</h3>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4>Publicación</h4>
-                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
-                                <center>
-                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4>Publicación</h4>
-                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
-                                <center>
-                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4>Publicación</h4>
-                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
-                                <center>
-                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4>Publicación</h4>
-                                <a href="#"><img alt="" class="img-responsive" src="uploads/default-image.png"></a>
-                                <center>
-                                    <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        $query2 = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate() LIMIT 4';
+                        $result2 = mysqli_query($con,$query2);
+                        if (mysqli_num_rows($result2) > 0)                           
+                        {                               
+                            while ($row_prod = mysqli_fetch_array($result2, MYSQLI_ASSOC))                               
+                            {
+                                echo '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body"><center>';
+                                echo '<h4>'.utf8_encode($row_prod['titulo']).'</h4>';
+                                //$verSubasta = 'subastas.php?id='.$row_prod['id'];
+                                echo '<a href="#"><img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'"></a>';
+                                echo '<a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>';
+                                echo "</center></div></div></div>";
+                            }
+                        }
+                        mysqli_free_result($result2);
+                    ?>
                 </div>                  
+            </div>
+            <div class="col-lg-12">
+                <center>
+                    <a href="subastas.php" class="btn btn-primary btn-block">Ver todas las publicaciones</a>
+                </center>
             </div>
         </div>
     </div>
+    <br>
 
     <script>
         $("[data-toggle=popover]").popover();

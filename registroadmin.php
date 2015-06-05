@@ -8,6 +8,7 @@
     <title>Bestnid - Registrarse</title>
     <meta name="author" content="https://github.com/tfeloy/Metro-consulting-group---Bestnid/wiki">
     <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>

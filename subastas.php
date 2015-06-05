@@ -10,6 +10,7 @@
     <title>Bestnid</title>
     <meta name="author" content="https://github.com/tfeloy/Metro-consulting-group---Bestnid/wiki">
     <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
@@ -63,7 +64,7 @@
             <div class="col-lg-12">
                 <?php
 
-                    $query = 'SELECT p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
+                    $query = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
                     if(isset($_GET['id']))
                     {
                         $query .= ' AND p.id_categoria = '.$_GET['id'];
@@ -73,6 +74,40 @@
                         $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%")';
                     }
 
+                    $result = mysqli_query($con,$query);
+                    if (mysqli_num_rows($result) > 0)                           
+                    {                                
+                        echo '<div class="list-group">';                                                             
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
+                        {
+                            $verSubasta = 'versubasta.php?id='.$row['id'];
+                            echo '<a href="#" class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <center>
+                                                <img alt="" class="img-responsive sizeimage140" src="uploads/'.$row['imagen'].'">
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h2 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h2>
+                                            
+                                            <p class="list-group-item-text lead">'.utf8_encode($row['descripcion']).'</p>    
+                                            <p class="text-success">Activo hasta: <em>'.$row['vigencia'].'</em></p>
+                                        </div>
+                                    </div>
+                                </a>';
+                        }
+                        echo "</div>";
+                    }
+                    else
+                    {
+                        echo "<h3>No hay resultados para mostrar.</h3>";
+                    }
+                    mysqli_free_result($result);
+
+
+                    /*
+                    
                     $result = mysqli_query($con,$query);
                     if (mysqli_num_rows($result) > 0)                           
                     {                                
@@ -104,8 +139,8 @@
                     }
                     mysqli_free_result($result);
 
+                    // Hasta aca llega
 
-                    /*
                     $query = 'SELECT p.titulo, p.descripcion, p.imagen, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
                     //$query = 'SELECT * FROM productos';
                     $result = $con->query($query);

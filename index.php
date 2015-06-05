@@ -56,9 +56,14 @@
         </div>
     </div>
     <div class="container">    
-        <div class="jumbotron">
-            <h1>Bestnid</h1>
-            <p>Donde todo lo que necesitas lo podes encontrar solo acá</p>
+        <div class="row">
+            <div class="col-sm-2">
+                <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+            </div>
+            <div class="col-sm-10">
+                <h1>Bestnid</h1>
+                <p>Donde todo lo que necesitas lo podes encontrar solo acá</p>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">

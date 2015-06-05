@@ -75,6 +75,17 @@
                       <option value="nombre" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "nombre"){echo ' selected';}} ?> >Nombre</option>
                       <option value="fecha" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "fecha"){echo ' selected';}} ?> >Fecha</option>
                     </select>   
+                    <?php
+                        echo '<input name="search" id="search" type="hidden" value="'.$_POST['search'].'">';
+                        if(isset($_GET['id']))
+                        {
+                            echo '<input name="id" id="id" type="hidden" value="'.$_GET['id'].'">';
+                        }
+                        if(isset($_POST['id']))
+                        {
+                            echo '<input name="id" id="id" type="hidden" value="'.$_POST['id'].'">';
+                        }
+                    ?>
                   </div>
                 </form>
             </div>
@@ -82,11 +93,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <?php
-
                     $query = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
                     if(isset($_GET['id']))
                     {
                         $query .= ' AND p.id_categoria = '.$_GET['id'];
+                    }
+                    if(isset($_POST['id']))
+                    {
+                        $query .= ' AND p.id_categoria = '.$_POST['id'];
                     }
                     if(isset($_POST['search']))
                     {

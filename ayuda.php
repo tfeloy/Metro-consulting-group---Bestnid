@@ -59,7 +59,12 @@
             <div class="col-lg-12">
                 <a href="#"><img alt="" class="img-responsive" src="assets/img/construccion.jpg"></a>
             </div>
-        </div>        
+            <div class="col-lg-12">
+                <center>
+                    <a href="index.php" class="btn btn-primary">Volver</a>
+                </center>
+            </div> 
+        </div>     
     </div>
 </body>
 </html>

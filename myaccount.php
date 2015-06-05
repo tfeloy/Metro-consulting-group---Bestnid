@@ -60,7 +60,7 @@
 				?>
 				<div class="row">
 		            <div class="col-lg-4">
-						<a href="registroadmin.php" class="btn btn-primary">Agregar Administrador</a>
+						<a href="registroadmin.php" class="btn btn-primary">Agregar Usuario</a>
 		            </div>
 		        </div>
 				<?php

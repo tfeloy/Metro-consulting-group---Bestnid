@@ -66,6 +66,20 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-sm-2 col-lg-offset-10">
+                <form id="order-form" class="form-horizontal" action="subastas.php" method="POST">
+                  <div class="form-group">
+                    <label class="control-label" for="order-list">Ordenar por</label>
+                    <select id="order-list" name="order-list" class="form-control input-sm" onchange="this.form.submit()">
+                      <option value="nombre" <?php if(isset($_POST['order-list'])){echo ' hidden';} ?> >Sin Orden</option>
+                      <option value="nombre" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "nombre"){echo ' selected';}} ?> >Nombre</option>
+                      <option value="fecha" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "fecha"){echo ' selected';}} ?> >Fecha</option>
+                    </select>   
+                  </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
                 <?php
 
@@ -77,6 +91,20 @@
                     if(isset($_POST['search']))
                     {
                         $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%")';
+                    }
+
+                    if(isset($_POST['order-list']))
+                    {
+                       
+                        if($_POST['order-list'] == "nombre")
+                        {
+                            $query .= ' ORDER BY p.titulo';    
+                        }
+                        else
+                        {
+                            $query .= ' ORDER BY vigencia DESC, p.titulo';
+                        }
+                        
                     }
 
                     $result = mysqli_query($con,$query);

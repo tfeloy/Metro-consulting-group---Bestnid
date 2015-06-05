@@ -11,9 +11,9 @@ CREATE TABLE users (
   `telefono` varchar(255) NOT NULL,
   `fecha_nac` date NOT NULL,
   `sexo` tinyint(1) NOT NULL DEFAULT '0',
-  `nro_tarjeta` varchar(255) NOT NULL,
+  `nro_tarjeta` varchar(255) DEFAULT NULL,
   `es_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `fecha_registro` datetime NOT NULL,
+  `fecha_registro` datetime NOT NULL
   PRIMARY KEY(id)
 ) ENGINE = INNODB;
 
@@ -54,15 +54,21 @@ CREATE TABLE productos (
   `id_vendedor` int(11) NOT NULL,
   `titulo` varchar(255) NOT NULL,
   `descripcion` longtext NOT NULL,
-  `imagen` varchar(255) NOT NULL,
-  `precio` varchar(255) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `precio` varchar(255) DEFAULT NULL,
   `fecha_publicacion` datetime NOT NULL,
   `fecha_fin` datetime NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '0',
-  `vendido` tinyint(1) NOT NULL DEFAULT '0',
-  `comision` varchar(255) NOT NULL,
+  `vendido` tinyint(1) DEFAULT '0',
+  `comision` varchar(255) DEFAULT NULL
   PRIMARY KEY(id)
 ) ENGINE = INNODB;
+
+INSERT INTO `productos` (`id`, `id_categoria`, `id_vendedor`, `titulo`, `descripcion`, `imagen`, `precio`, `fecha_publicacion`, `fecha_fin`, `activo`, `vendido`, `comision`) VALUES
+(1, 3, 2, 'Increible camara Canon', 'Increible camara Canon, no te pierdas esta oportunidad', 'canon.jpg', NULL, '2015-06-03 00:00:00', '2015-07-30 00:00:00', 1, 0, NULL),
+(2, 6, 2, 'Teclado inalambrico Logitech', 'Teclado inalambrico Logitech con sorpresa de regalo', 'teclado.jpg', NULL, '2015-06-04 00:00:00', '2015-06-30 00:00:00', 1, 0, NULL),
+(3, 9, 2, 'Remera de Messi', 'Remera de messi transpirada por el no el hermano', 'messi.jpg', NULL, '2015-06-04 00:00:00', '2015-07-22 00:00:00', 1, 0, NULL),
+(4, 8, 2, 'Rutini wine', 'Rutini wine Malbec', 'rutini.jpg', NULL, '2015-06-10 00:00:00', '2015-06-24 00:00:00', 1, 0, NULL);
 
 CREATE TABLE ofertas_realizadas (
   `id_usuario` int(11) NOT NULL,

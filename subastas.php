@@ -97,7 +97,7 @@
                                             <h2 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h2>
                                             
                                             <p class="list-group-item-text lead">'.utf8_encode($row['descripcion']).'</p>    
-                                            <p class="text-success">Activo hasta: <em>'.$row['vigencia'].'</em></p>
+                                            <p class="text-success">Activo hasta: <em>'.date("d-m-Y", strtotime($row['vigencia'])).'</em></p>
                                         </div>
                                     </div>
                                 </a>';

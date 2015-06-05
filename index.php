@@ -73,7 +73,7 @@
             </div>
         </div>        
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <h3>Categorias</h3>
                 <?php
                     $query = 'SELECT id, nombre FROM categorias';
@@ -91,11 +91,11 @@
                     mysqli_free_result($result);
                 ?>
             </div>
-            <div class="col-lg-8">
+            <div class="col-md-8">
                 <h3>Publicaciones Destacadas</h3>
                 <div class="row">
                     <?php
-                        $query2 = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate() LIMIT 4';
+                        $query2 = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate() ORDER BY vigencia ASC LIMIT 4';
                         $result2 = mysqli_query($con,$query2);
                         if (mysqli_num_rows($result2) > 0)                           
                         {                               

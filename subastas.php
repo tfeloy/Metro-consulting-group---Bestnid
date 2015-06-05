@@ -104,74 +104,15 @@
                         echo "<h3>No hay resultados para mostrar.</h3>";
                     }
                     mysqli_free_result($result);
-
-
-                    /*
-                    
-                    $result = mysqli_query($con,$query);
-                    if (mysqli_num_rows($result) > 0)                           
-                    {                                
-                        echo '<table class="table table-striped table-hover ">
-                              <thead>
-                                <tr>
-                                  <th>Titulo</th>
-                                  <th>Descripción</th>
-                                  <th>Vigencia</th>
-                                  <th>Categoria</th>
-                                </tr>
-                              </thead>
-                              <tbody>';                                                             
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
-                        {
-                            $verCat = 'categoria.php?id='.$row['id'];
-                            echo '<tr>
-                                    <td>'.utf8_encode($row['titulo']).'</td>
-                                    <td>'.utf8_encode($row['descripcion']).'</td>
-                                    <td>'.utf8_encode($row['vigencia']).'</td>
-                                    <td>'.utf8_encode($row['catName']).'</td>
-                                  </tr>';
-                        }
-                        echo "</tbody></table> ";
-                    }
-                    else
-                    {
-                        echo "<h3>No hay resultados para mostrar.</h3>";
-                    }
-                    mysqli_free_result($result);
-
-                    // Hasta aca llega
-
-                    $query = 'SELECT p.titulo, p.descripcion, p.imagen, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
-                    //$query = 'SELECT * FROM productos';
-                    $result = $con->query($query);
-                    
-                    if($result->num_rows > 0)
-                    {
-
-                        while($row = $result->fetch_array(MYSQLI_ASSOC))
-                        {
-                            $estruc = '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body">';
-                           
-                            $pub = '<h4>'.$row['titulo'].'</4>';
-                            $pub .= '<a href=""><img alt="" class="img-responsive" src="uploads/default-image.png"></a>';
-                            $pub .= 'Descripción<p style="background-color: lightgrey;border-radius: 3px;text-align: justify;">'.$row['descripcion'].'</p>';
-                            $pub .= '<p>Activo hasta: <span style="float:right; color: green;">'.$row['vigencia'].'</span><br>Categ:<span style="float:right; color: red;"> '.utf8_encode($row['catName']).'</span></p>';
-                              
-                            $estruc .= $pub;
-                            $estruc .= '</div></div></div>';
-                           
-                            echo $estruc;
-                        } 
-                    }
-                    else
-                    {
-                        echo "<h3>No hay resultados para mostrar.</h3>";
-                    }
-                    */
-
                 ?>
+            </div>
+            <div class="col-lg-12">
+                <center>
+                    <a href="index.php" class="btn btn-primary">Volver</a>
+                </center>
             </div>
         </div>
     </div>
+    <br>
 </body>
 </html>

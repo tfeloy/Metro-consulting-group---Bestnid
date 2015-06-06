@@ -58,15 +58,13 @@
             <?php
                 if (!empty($_SESSION['reg']))
                 {
-                    echo'
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
+                    echo'<div class="col-lg-12">
                             <div class="alert alert-dismissible alert-success">
+                            <center>
                                 <strong>'.$_SESSION['reg'].'</strong>
+                            </center>
                             </div>
-                        </div>
-                    </div>
-                    ';
+                        </div>';
                     unset($_SESSION['reg']); //Elimino la variable de session luego de imprimirla
                 }
             ?>

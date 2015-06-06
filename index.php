@@ -58,7 +58,9 @@
     <div class="container">    
         <div class="row">
             <div class="col-sm-2">
-                <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+                <a href="index.php">
+                    <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+                </a>
             </div>
             <div class="col-sm-10">
                 <h1>Bestnid</h1>
@@ -109,7 +111,8 @@
                                 echo '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body"><center>';
                                 echo '<h4>'.utf8_encode($row_prod['titulo']).'</h4>';
                                 //$verSubasta = 'subastas.php?id='.$row_prod['id'];
-                                echo '<a href="#"><img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'"></a>';
+                                //echo '<a href="#"><img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'"></a>';
+                                echo '<img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'">';
                                 echo '<a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>';
                                 echo "</center></div></div></div>";
                             }

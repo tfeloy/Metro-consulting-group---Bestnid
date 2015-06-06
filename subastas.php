@@ -58,7 +58,9 @@
     <div class="container">    
         <div class="row">
             <div class="col-sm-2">
-                <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+                <a href="index.php">
+                    <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+                </a>
             </div>
             <div class="col-sm-10">
                 <h1>Bestnid</h1>
@@ -104,7 +106,7 @@
                     }
                     if(isset($_POST['search']))
                     {
-                        $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%")';
+                        $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%" OR c.nombre LIKE "%'.$_POST['search'].'%")';
                     }
 
                     if(isset($_POST['order-list']))
@@ -140,6 +142,8 @@
                                             
                                             <p class="list-group-item-text lead">'.utf8_encode($row['descripcion']).'</p>    
                                             <p class="text-success">Activo hasta: <em>'.date("d-m-Y", strtotime($row['vigencia'])).'</em></p>
+                                            <p class="text-info">'.utf8_encode($row['catName']).'</p>
+
                                         </div>
                                     </div>
                                 </a>';

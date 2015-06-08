@@ -46,8 +46,10 @@
 		mysqli_close($con);
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 	}
-
-	/* Redirecciones a Success.php con un lindo mensaje :-) */
-	$_SESSION['reg'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
-	echo '<script type="text/javascript"> window.location = "success.php"</script>';
+	else
+	{
+		/* Redirecciones a Success.php con un lindo mensaje :-) */
+		$_SESSION['reg'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
+		echo '<script type="text/javascript"> window.location = "success.php"</script>';
+	}
 ?>

@@ -16,7 +16,7 @@
 		$_SESSION['reg'] = 'El email ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 		//header("Location: $pathbase/registro.php"); 
-        //die(); 
+        die(); 
 	}
 
 	/* Consulto si ya esta en uso el nombre de usuario */
@@ -28,6 +28,7 @@
 		mysqli_close($con);
 		$_SESSION['reg'] = 'El Usuario ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
+		die(); 
 	}
 
 	// Security 
@@ -44,12 +45,9 @@
 		$_SESSION['reg'] = mysqli_error();
 		mysqli_free_result($result);
 		mysqli_close($con);
-		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 	}
-	else
-	{
-		/* Redirecciones a Success.php con un lindo mensaje :-) */
-		$_SESSION['reg'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
-		echo '<script type="text/javascript"> window.location = "success.php"</script>';
-	}
+
+	/* Redirecciones a Success.php con un lindo mensaje :-) */
+	$_SESSION['reg'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
+	echo '<script type="text/javascript"> window.location = "success.php"</script>';
 ?>

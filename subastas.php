@@ -107,6 +107,7 @@
                     if(isset($_POST['search']))
                     {
                         $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%" OR c.nombre LIKE "%'.$_POST['search'].'%")';
+                        echo "<p>Esta buscando: <strong>".$_POST['search']."</strong>.</p>";
                     }
 
                     if(isset($_POST['order-list']))

@@ -13,7 +13,7 @@
 	{
 		mysqli_free_result($resEmailExiste);
 		mysqli_close($con);
-		$_SESSION['reg'] = 'El email ya esta en uso, por favor use otro';
+		$_SESSION['mensaje'] = 'El email ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 		//header("Location: $pathbase/registro.php"); 
         die(); 
@@ -26,7 +26,7 @@
 	{
 		mysqli_free_result($resUsernameExiste);
 		mysqli_close($con);
-		$_SESSION['reg'] = 'El Usuario ya esta en uso, por favor use otro';
+		$_SESSION['mensaje'] = 'El Usuario ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 		die(); 
 	}
@@ -42,12 +42,12 @@
 
 	if(!$result)
 	{
-		$_SESSION['reg'] = mysqli_error();
+		$_SESSION['mensaje'] = mysqli_error();
 		mysqli_free_result($result);
 		mysqli_close($con);
 	}
 
 	/* Redirecciones a Success.php con un lindo mensaje :-) */
-	$_SESSION['reg'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
+	$_SESSION['mensaje'] = 'El registro se realizo exitosamente, ya puede publicar y comprar en Bestind';
 	echo '<script type="text/javascript"> window.location = "success.php"</script>';
 ?>

@@ -130,18 +130,18 @@
                 </div>
 
                 <?php
-                    if (!empty($_SESSION['reg']))
+                    if (!empty($_SESSION['mensaje']))
                     {
                         echo'
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <div class="alert alert-dismissible alert-danger">
-                                    <strong>'.$_SESSION['reg'].'</strong>
+                                    <strong>'.$_SESSION['mensaje'].'</strong>
                                 </div>
                             </div>
                         </div>
                         ';
-                        unset($_SESSION['reg']); //Elimino la variable de session luego de imprimirla
+                        unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
                     }
                 ?>
 

@@ -15,6 +15,8 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <script src="assets/js/validate.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -56,15 +58,88 @@
         </div>
     </div>
     <div class="container">    
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="#"><img alt="" class="img-responsive" src="assets/img/construccion.jpg"></a>
-            </div>
-            <div class="col-lg-12">
-                <center>
-                    <a href="index.php" class="btn btn-primary">Volver</a>
-                </center>
-            </div>
+        <div class="jumbotron">
+            <form action="savedsubastar.php" class="form-horizontal" method="post" id="subastar-form" enctype="multipart/form-data"> 
+                <legend>Subastar Producto</legend>
+                <div class="form-group">
+                    <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" name="titulo" placeholder="Increible cuadro">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCategoria" class="col-lg-2 control-label">Categoria</label>
+                    <div class="col-lg-10">
+                        <select name="categoria" class="categoria form-control" id="categoria">
+                            <option value="">Seleccione una Categoria</option>
+                            <?php
+                                $query = 'SELECT id, nombre FROM categorias';
+                                $result = mysqli_query($con,$query);
+                                if (mysqli_num_rows($result) > 0)                           
+                                {                               
+                                    echo '<div class="list-group">';                                                             
+                                    while ($row_cat = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
+                                    {
+                                        echo '<option value="'.$row_cat['id'].'">'.utf8_encode($row_cat['nombre']).'</option>';
+                                    }
+                                    echo "</div>";
+                                }
+                                mysqli_free_result($result);
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDescripcion" class="col-lg-2 control-label">Descripción</label>
+                    <div class="col-lg-10">
+                        <textarea name="descripcion" placeholder="Descripción" class="descripcion form-control" id='descripcion' rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputImagen" class="col-lg-2 control-label">Imagen</label>
+                    <div class="col-lg-10">
+                        <input name="archivo1" type="file" id="archivo1" class="archivo1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFecha" class="col-lg-2 control-label">Fecha de Fin</label>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <input class="form-control" type="dia" name="dia" placeholder="Día">
+                            </div>
+                            <div class="col-xs-3">
+                                <input class="form-control" type="mes" name="mes" placeholder="Mes">
+                            </div>
+                            <div class="col-xs-6">
+                                <input class="form-control" type="ano" name="ano" placeholder="Año">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+                    if (!empty($_SESSION['sub']))
+                    {
+                        echo'
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <div class="alert alert-dismissible alert-danger">
+                                    <strong>'.$_SESSION['sub'].'</strong>
+                                </div>
+                            </div>
+                        </div>
+                        ';
+                        unset($_SESSION['sub']); //Elimino la variable de session luego de imprimirla
+                    }
+                ?>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <input type="submit" class="btn btn-success" value="Vender" /> 
+                    </div>
+                </div>
+            </form>
         </div>        
     </div>
 </body>

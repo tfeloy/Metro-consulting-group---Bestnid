@@ -56,16 +56,16 @@
     <div class="container">    
         <div class="row">
             <?php
-                if (!empty($_SESSION['reg']))
+                if (!empty($_SESSION['mensaje']))
                 {
                     echo'<div class="col-lg-12">
                             <div class="alert alert-dismissible alert-success">
                             <center>
-                                <strong>'.$_SESSION['reg'].'</strong>
+                                <strong>'.$_SESSION['mensaje'].'</strong>
                             </center>
                             </div>
                         </div>';
-                    unset($_SESSION['reg']); //Elimino la variable de session luego de imprimirla
+                    unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
                 }
             ?>
         </div>

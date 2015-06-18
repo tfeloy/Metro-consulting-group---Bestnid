@@ -1,0 +1,202 @@
+<?php
+    include('conex.php');
+    $con = Conectarse();    
+    session_start();    
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bestnid</title>
+    <meta name="author" content="https://github.com/tfeloy/Metro-consulting-group---Bestnid/wiki">
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <script src="assets/js/jquery-1.7.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php">Bestnid</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse"> 
+            <ul class="nav navbar-nav navbar-right">
+                <?php
+                    if(empty($_SESSION['user'])) 
+                    {
+                        ?>
+                        <li><a href="registro.php">Registrarse</a></li>
+                        <li><a href="login.php">Iniciar Sesión</a></li>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo htmlentities($_SESSION['user'][3], ENT_QUOTES, 'UTF-8') ?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="myaccount.php"><i class="fa fa-child"></i> Mi Cuenta</a></li>
+                                <li class="divider"></li>
+                                <li><a href="logout.php"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="subastar.php">Subastar</a></li>
+                        <?php
+                    }
+                ?>
+                <li><a href="ayuda.php"><i class="fa fa-life-ring"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">    
+        <div class="row">
+            <div class="col-sm-2">
+                <a href="index.php">
+                    <img alt="" class="img-responsive" src="assets/img/logo.jpg">
+                </a>
+            </div>
+            <div class="col-sm-10">
+                <h1>Bestnid</h1>
+                <p>Donde todo lo que necesitas lo podes encontrar solo acá</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <?php
+                    $query = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
+                    if(isset($_GET['id']))
+                    {
+                        $query .= ' AND p.id = '.$_GET['id'];
+                    }
+
+                    $result = mysqli_query($con,$query);
+                    if (mysqli_num_rows($result) > 0)                           
+                    {                                
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
+                        {
+                            $verSubasta = 'versubasta.php?id='.$row['id'];
+                            echo '<div class="row">
+                                <div class="col-sm-12">
+                                    <center>
+                                        <h1 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h1>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <center>
+                                        <img alt="" class="img-responsive sizeimage140" src="uploads/'.$row['imagen'].'">
+                                    </center>
+                                </div>
+                                <div class="col-sm-10">                                            
+                                    <p class="list-group-item-text lead">'.utf8_encode($row['descripcion']).'</p>    
+                                    <p class="text-success">Activo hasta: <em>'.date("d-m-Y", strtotime($row['vigencia'])).'</em></p>
+                                    <p class="text-info">'.utf8_encode($row['catName']).'</p>';
+                                    if(empty($_SESSION['user'])) 
+                                    {
+                                        echo '<div class="row"><a href="registro.php" class="btn btn-lg btn-primary">Registarte para ofertar</a></div>';
+                                    }
+                                    else
+                                    {
+                                        echo '<div class="row"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ofertar">Ofertar</button></div>';
+                                    }
+                                    echo '
+                                </div>
+                            </div>';
+
+                            ?>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="ofertar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Ofertar</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="#" class="form-horizontal" method="post" id="register-form"> 
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <textarea name="necesidad" placeholder="Necesidad" class="necesidad form-control" id='necesidad' rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">$</span>
+                                                            <input class="form-control" type="text" name="precio" placeholder="150,30">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <button type="button" class="btn btn-primary btn-block">Ofertar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+
+                        <div class="row">
+                            <h2>Preguntas</h2>
+                            <table class="table table-striped table-hover ">
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>11-06-2015 19:01:19 | <i class="fa fa-comment"></i> <strong> Cuanto tiempo de uso tiene?</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover ">
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>10-06-2015 17:20:09 | <i class="fa fa-comment"></i> <strong> Cual es el estado del producto?</strong></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>10-06-2015 17:29:09 | <i class="fa fa-comments"></i> <strong> Muy bueno</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover ">
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>09-06-2015 14:20:59 | <i class="fa fa-comment"></i> <strong> Cuanto tiempo de uso tiene?</strong></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>09-06-2015 14:32:09 | <i class="fa fa-comments"></i> <strong> Solo 3 Meses</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table> 
+                        </div>
+                        <?php
+                    }
+                    else
+                    {
+                        echo "<h3>No hay resultados para mostrar.</h3>";
+                    }
+                    mysqli_free_result($result);
+                ?>
+            </div>
+            <div class="col-lg-12">
+                <center>
+                    <a href="index.php" class="btn btn-primary">Volver</a>
+                </center>
+            </div>
+        </div>
+    </div>
+    <br>
+</body>
+</html>

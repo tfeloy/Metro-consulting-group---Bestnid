@@ -110,10 +110,9 @@
                             {
                                 echo '<div class="col-lg-6"><div class="panel panel-default"><div class="panel-body"><center>';
                                 echo '<h4>'.utf8_encode($row_prod['titulo']).'</h4>';
-                                //$verSubasta = 'subastas.php?id='.$row_prod['id'];
-                                //echo '<a href="#"><img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'"></a>';
+                                $verSubasta = 'versubasta.php?id='.$row_prod['id'];
                                 echo '<img alt="" class="img-responsive sizeimage250" src="uploads/'.$row_prod['imagen'].'">';
-                                echo '<a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="bottom" title="En construcción" data-content="Proxima Etapa">Ver Publicación</a>';
+                                echo '<a href="'.$verSubasta.'" class="btn btn-primary">Ver Publicación</a>';
                                 echo "</center></div></div></div>";
                             }
                         }

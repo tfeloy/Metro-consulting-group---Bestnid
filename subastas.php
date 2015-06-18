@@ -78,7 +78,10 @@
                       <option value="fecha" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "fecha"){echo ' selected';}} ?> >Fecha</option>
                     </select>   
                     <?php
-                        echo '<input name="search" id="search" type="hidden" value="'.$_POST['search'].'">';
+                        if(isset($_POST['search']))
+                        {
+                            echo '<input name="search" id="search" type="hidden" value="'.$_POST['search'].'">';
+                        }
                         if(isset($_GET['id']))
                         {
                             echo '<input name="id" id="id" type="hidden" value="'.$_GET['id'].'">';
@@ -107,12 +110,11 @@
                     if(isset($_POST['search']))
                     {
                         $query .= ' AND (p.titulo LIKE "%'.$_POST['search'].'%" OR p.descripcion LIKE "%'.$_POST['search'].'%" OR c.nombre LIKE "%'.$_POST['search'].'%")';
-                        echo "<p>Esta buscando: <strong>".$_POST['search']."</strong>.</p>";
+                        echo "<p>Esta buscando: <strong>".$_POST['search']."</strong></p>";
                     }
 
                     if(isset($_POST['order-list']))
                     {
-                       
                         if($_POST['order-list'] == "nombre")
                         {
                             $query .= ' ORDER BY p.titulo';    
@@ -121,7 +123,6 @@
                         {
                             $query .= ' ORDER BY vigencia DESC, p.titulo';
                         }
-                        
                     }
 
                     $result = mysqli_query($con,$query);
@@ -131,7 +132,7 @@
                         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
                         {
                             $verSubasta = 'versubasta.php?id='.$row['id'];
-                            echo '<a href="#" class="list-group-item">
+                            echo '<a href="'.$verSubasta.'" class="list-group-item">
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <center>

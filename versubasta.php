@@ -102,7 +102,7 @@
                                     <p class="text-info">'.utf8_encode($row['catName']).'</p>';
                                     if(empty($_SESSION['user'])) 
                                     {
-                                        echo '<div class="row"><a href="registro.php" class="btn btn-lg btn-primary">Registarte para ofertar</a></div>';
+                                        echo '<div class="row"><a href="registro.php" class="btn btn-lg btn-success">Regístrese para ofertar</a></div>';
                                     }
                                     else
                                     {
@@ -180,6 +180,56 @@
                                     </tr>
                                 </tbody>
                             </table> 
+                            <?php
+
+                            if(empty($_SESSION['user'])) 
+                            {
+                                echo '
+                                <div class="row">
+                                    <center>
+                                    <a href="index.php" class="btn btn-danger btn-lg">Volver</a>
+                                    <a href="registro.php" class="btn btn-lg btn-success">Regístrese para preguntar</a>
+                                    </center>
+                                </div>';
+                            }
+                            else
+                            {
+                                echo '
+                                <div class="row">
+                                    <center>
+                                    <a href="index.php" class="btn btn-danger btn-lg">Volver</a>
+                                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#preguntar">Preguntar</button>
+                                    </center>
+                                </div>';
+                            }
+                            ?>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="preguntar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Deje su pregunta</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="#" class="form-horizontal" method="post" id="register-form"> 
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <textarea name="necesidad" placeholder="Necesidad" class="necesidad form-control" id='necesidad' rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <button type="button" class="btn btn-primary btn-block">Preguntar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <?php
                     }
@@ -189,11 +239,6 @@
                     }
                     mysqli_free_result($result);
                 ?>
-            </div>
-            <div class="col-lg-12">
-                <center>
-                    <a href="index.php" class="btn btn-primary">Volver</a>
-                </center>
             </div>
         </div>
     </div>

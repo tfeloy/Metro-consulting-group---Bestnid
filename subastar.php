@@ -102,19 +102,27 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputFecha" class="col-lg-2 control-label">Fecha de Fin</label>
+                    <label for="inputFecha" class="col-lg-2 control-label">Días que durará la publicación</label>
                     <div class="col-lg-10">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <input class="form-control" type="dia" name="dia" placeholder="Día">
-                            </div>
-                            <div class="col-xs-3">
-                                <input class="form-control" type="mes" name="mes" placeholder="Mes">
-                            </div>
-                            <div class="col-xs-6">
-                                <input class="form-control" type="ano" name="ano" placeholder="Año">
-                            </div>
-                        </div>
+                        <select name="dias" class="dias form-control" id="dias">
+                            <option value="">Días</option>
+                            <option value="15">15 días</option>
+                            <option value="16">16 días</option>
+                            <option value="17">17 días</option>
+                            <option value="18">18 días</option>
+                            <option value="19">19 días</option>
+                            <option value="20">20 días</option>
+                            <option value="21">21 días</option>
+                            <option value="22">22 días</option>
+                            <option value="23">23 días</option>
+                            <option value="24">24 días</option>
+                            <option value="25">25 días</option>
+                            <option value="26">26 días</option>
+                            <option value="27">27 días</option>
+                            <option value="28">28 días</option>
+                            <option value="29">29 días</option>
+                            <option value="30">30 días</option>
+                        </select>
                     </div>
                 </div>
 

@@ -200,16 +200,26 @@ $(document).ready(function(){
         minlength: 5,
         required: true
       },
-      dia: {
-        range: [1, 31],
+      dias: {
         required: true
-      },
-      mes: {
-        range: [1, 12],
-        required: true
-      },
-      ano: {
-        range: [1910, 2015],
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.control-group').removeClass('success').addClass('error');
+    },
+    success: function(element) {
+      element
+      .closest('.control-group').removeClass('error');
+    }
+  });
+}); // end document.ready
+
+$(document).ready(function(){
+  $('#pregunta-form').validate(
+  {
+    rules: {
+      pregunta: {
+        minlength: 5,
         required: true
       }
     },

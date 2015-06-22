@@ -15,6 +15,8 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <script src="assets/js/validate.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -71,7 +73,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <?php
-                    $query = 'SELECT p.id, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
+                    $query = 'SELECT p.id, p.id_vendedor, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
                     if(isset($_GET['id']))
                     {
                         $query .= ' AND p.id = '.$_GET['id'];
@@ -106,7 +108,14 @@
                                     }
                                     else
                                     {
-                                        echo '<div class="row"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ofertar">Ofertar</button></div>';
+                                        if ($_SESSION['user'][0] == $row['id_vendedor']) 
+                                        {
+                                            echo '<div class="row"><a class="btn btn-lg btn-warning">No puede ofertar su producto</a></div>';
+                                        }
+                                        else
+                                        {
+                                            echo '<div class="row"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ofertar">Ofertar</button></div>';
+                                        }
                                     }
                                     echo '
                                 </div>
@@ -150,37 +159,42 @@
                             <?php
                         }
                         ?>
-
                         <div class="row">
-                            <h2>Preguntas</h2>
-                            <table class="table table-striped table-hover ">
-                                <tbody>
-                                    <tr class="danger">
-                                        <td>11-06-2015 19:01:19 | <i class="fa fa-comment"></i> <strong> Cuanto tiempo de uso tiene?</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-striped table-hover ">
-                                <tbody>
-                                    <tr class="danger">
-                                        <td>10-06-2015 17:20:09 | <i class="fa fa-comment"></i> <strong> Cual es el estado del producto?</strong></td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>10-06-2015 17:29:09 | <i class="fa fa-comments"></i> <strong> Muy bueno</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-striped table-hover ">
-                                <tbody>
-                                    <tr class="danger">
-                                        <td>09-06-2015 14:20:59 | <i class="fa fa-comment"></i> <strong> Cuanto tiempo de uso tiene?</strong></td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>09-06-2015 14:32:09 | <i class="fa fa-comments"></i> <strong> Solo 3 Meses</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table> 
                             <?php
+                            $queryPreg = 'SELECT c.id_producto, c.id_usuario, c.pregunta, c.fecha_pregunta AS fecha_pregunta, c.id_vendedor, c.respuesta, c.fecha_respuesta AS fecha_respuesta FROM consultas c ';
+                            if(isset($_GET['id']))
+                            {
+                                $queryPreg .= ' WHERE c.id_producto = '.$_GET['id'].' ORDER BY fecha_pregunta DESC';
+                            }
+
+                            $resultPreg = mysqli_query($con,$queryPreg);
+                            if (mysqli_num_rows($resultPreg) > 0)                           
+                            {                                
+                                echo "<h2>Preguntas</h2>";
+                                while ($rowPreg = mysqli_fetch_array($resultPreg, MYSQLI_ASSOC))                               
+                                {
+                                    ?>
+                                    <table class="table table-striped table-hover ">
+                                        <tbody>
+                                            <tr class="danger">
+                                                <td> <?php echo $rowPreg['fecha_pregunta']; ?> | <i class="fa fa-comment"></i> <strong> <?php echo utf8_encode($rowPreg['pregunta']); ?></strong></td>
+                                            </tr>
+
+                                            <?php if ($rowPreg['id_vendedor'] != 0) { ?>
+                                                <tr class="active">
+                                                    <td> <?php echo $rowPreg['fecha_respuesta']; ?> | <i class="fa fa-comments"></i> <strong> <?php echo utf8_encode($rowPreg['respuesta']); ?> </strong></td>
+                                                </tr>
+                                            <?php } ?>
+
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                echo "<center><h3>No hay preguntas. Se el primero.</h3></center><br>";
+                            }
 
                             if(empty($_SESSION['user'])) 
                             {
@@ -213,15 +227,16 @@
                                             <h4 class="modal-title" id="myModalLabel">Deje su pregunta</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="#" class="form-horizontal" method="post" id="register-form"> 
+                                            <form action="savedpregunta.php" class="form-horizontal" method="post" id="pregunta-form"> 
                                                 <div class="form-group">
                                                     <div class="col-lg-12">
-                                                        <textarea name="necesidad" placeholder="Necesidad" class="necesidad form-control" id='necesidad' rows="4"></textarea>
+                                                        <textarea name="pregunta" placeholder="Deje su pregunta" class="pregunta form-control" id='pregunta' rows="4"></textarea>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="id_producto" value="<?php echo $_GET['id']; ?>">
                                                 <div class="form-group">
                                                     <div class="col-lg-12">
-                                                        <button type="button" class="btn btn-primary btn-block">Preguntar</button>
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Preguntar" /> 
                                                     </div>
                                                 </div>
                                             </form>
@@ -229,7 +244,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <?php
                     }
@@ -238,10 +252,11 @@
                         echo "<h3>No hay resultados para mostrar.</h3>";
                     }
                     mysqli_free_result($result);
+                    mysqli_free_result($resultPreg);
                 ?>
             </div>
         </div>
+        <br>
     </div>
-    <br>
 </body>
 </html>

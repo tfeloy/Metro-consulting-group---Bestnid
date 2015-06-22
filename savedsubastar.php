@@ -3,8 +3,8 @@
 	$con = Conectarse();	
 	session_start();	
 
-    date_default_timezone_set('America/Argentina/Buenos_Aires');     	/* Seteo hora de Argentina */
-    $dia_actual = date("y/m/d H:i:s");									/* Dia de hoy */
+    date_default_timezone_set('America/Argentina/Buenos_Aires');     				/* Seteo hora de Argentina */
+    $dia_actual = date('Y-m-d H:i:s');												/* Dia de hoy */
 
 	$contador = 0;
 	if (!empty($_FILES['archivo1']['name']))
@@ -26,7 +26,7 @@
 	{
 	    $image_types = array
         ( 
-			// .. JPEG 
+			// JPEG 
 			'image/jpeg'        => '.jpeg', 
 			'image/jpg'        => '.jpg', 
 			// (A)PNG (Animated) Portable Network Graphics 
@@ -37,7 +37,9 @@
 		$nameArch1 = date("Y-m-d")."-P".$prefijo1."-Sub".$image_types[$extension1];		
 		$destino =  "uploads/".$nameArch1;
 		copy($_FILES['archivo1']['tmp_name'],$destino);
-	    $fecha_fin = $_POST['ano'].'-'.$_POST['mes'].'-'.$_POST['dia'];
+		
+		$fecha_fin = strtotime( '+'.$_POST['dias'].' day', strtotime($dia_actual)); 	/* Incrementos los dias */
+    	$fecha_fin = date('Y-m-d H:i:s', $fecha_fin);									/* Formateo fecha fin */
 
 		/* Guardo luego de pasar todas las validaciones */
 		$sql = 'INSERT INTO productos (id_categoria, id_vendedor, titulo, descripcion, imagen, precio, fecha_publicacion, fecha_fin, activo, vendido, comision ) ';

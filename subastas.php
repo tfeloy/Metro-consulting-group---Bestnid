@@ -73,7 +73,7 @@
                   <div class="form-group">
                     <label class="control-label" for="order-list">Ordenar por</label>
                     <select id="order-list" name="order-list" class="form-control input-sm" onchange="this.form.submit()">
-                      <option value="nombre" <?php if(isset($_POST['order-list'])){echo ' hidden';} ?> >Sin Orden</option>
+                      <option value="" <?php if(isset($_POST['order-list'])){echo ' hidden';} ?> >Sin Orden</option>
                       <option value="nombre" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "nombre"){echo ' selected';}} ?> >Nombre</option>
                       <option value="fecha" <?php if(isset($_POST['order-list'])){ if($_POST['order-list'] == "fecha"){echo ' selected';}} ?> >Fecha</option>
                     </select>   

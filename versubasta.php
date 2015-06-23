@@ -108,7 +108,8 @@
                                     }
                                     else
                                     {
-                                        if ($_SESSION['user'][0] == $row['id_vendedor']) 
+                                        $idvendedor = $row['id_vendedor'];
+                                        if ($_SESSION['user'][0] == $idvendedor) 
                                         {
                                             echo '<div class="row"><a class="btn btn-lg btn-warning">No puede ofertar su producto</a></div>';
                                         }
@@ -208,13 +209,20 @@
                             }
                             else
                             {
-                                echo '
-                                <div class="row">
-                                    <center>
-                                    <a href="index.php" class="btn btn-danger btn-lg">Volver</a>
-                                    <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#preguntar">Preguntar</button>
-                                    </center>
-                                </div>';
+                                if ($_SESSION['user'][0] == $idvendedor) 
+                                {
+                                    echo '<div class="row"><center><a class="btn btn-lg btn-warning">No puedes preguntar por tus producto</a></center></div>';
+                                }
+                                else
+                                {
+                                    echo '
+                                    <div class="row">
+                                        <center>
+                                        <a href="index.php" class="btn btn-danger btn-lg">Volver</a>
+                                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#preguntar">Preguntar</button>
+                                        </center>
+                                    </div>';
+                                }
                             }
                             ?>
 

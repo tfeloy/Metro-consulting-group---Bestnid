@@ -162,7 +162,7 @@
                         ?>
                         <div class="row">
                             <?php
-                            $queryPreg = 'SELECT c.id_producto, c.id_usuario, c.pregunta, c.fecha_pregunta AS fecha_pregunta, c.id_vendedor, c.respuesta, c.fecha_respuesta AS fecha_respuesta FROM consultas c ';
+                            $queryPreg = 'SELECT c.id, c.id_producto, c.id_usuario, c.pregunta, c.fecha_pregunta AS fecha_pregunta, c.id_vendedor, c.respuesta, c.fecha_respuesta AS fecha_respuesta FROM consultas c ';
                             if(isset($_GET['id']))
                             {
                                 $queryPreg .= ' WHERE c.id_producto = '.$_GET['id'].' ORDER BY fecha_pregunta DESC';
@@ -170,7 +170,8 @@
 
                             $resultPreg = mysqli_query($con,$queryPreg);
                             if (mysqli_num_rows($resultPreg) > 0)                           
-                            {                                
+                            {           
+                                $idConsulta = $resultPreg['id'];
                                 echo "<h2>Preguntas</h2>";
                                 while ($rowPreg = mysqli_fetch_array($resultPreg, MYSQLI_ASSOC))                               
                                 {
@@ -178,7 +179,10 @@
                                     <table class="table table-striped table-hover ">
                                         <tbody>
                                             <tr class="danger">
-                                                <td> <?php echo $rowPreg['fecha_pregunta']; ?> | <i class="fa fa-comment"></i> <strong> <?php echo utf8_encode($rowPreg['pregunta']); ?></strong></td>
+                                                <td> 
+                                                    <?php echo $rowPreg['fecha_pregunta']; ?> | <i class="fa fa-comment"></i> <strong> <?php echo utf8_encode($rowPreg['pregunta']); ?></strong>                                                    
+                                                </td>
+                                                <?php if ($rowPreg['id_vendedor'] == 0) { ?><td> <p class="text-right"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#responder">Responder</button></p> </td> <?php } ?>
                                             </tr>
 
                                             <?php if ($rowPreg['id_vendedor'] != 0) { ?>
@@ -253,6 +257,35 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <!-- Modal -->
+                            <div class="modal fade" id="responder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Ofertar</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="saveRespuesta.php" class="form-horizontal" method="post" id="register-form"> 
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <textarea name="respuesta" placeholder="Responda la pregunta" class="respuesta form-control" id='respuesta' rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="id_consulta" value="<?php echo $idConsulta ?>">
+                                                <input type="hidden" name="id_producto" value="<?php echo $_GET['id']; ?>">
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Responder" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                     }
                     else
@@ -262,6 +295,9 @@
                     mysqli_free_result($result);
                     mysqli_free_result($resultPreg);
                 ?>
+
+
+
             </div>
         </div>
         <br>

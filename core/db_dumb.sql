@@ -85,14 +85,18 @@ INSERT INTO `productos` (`id`, `id_categoria`, `id_vendedor`, `titulo`, `descrip
 (18, 18, 4, 'Vestido Importado', 'Vestido Importado De Fiesta De Encaje Elastizado - Noche', 'vestido.jpg', NULL, '2015-06-01 00:00:00', '2015-07-29 00:00:00', 1, 0, NULL),
 (19, 19, 5, 'Combo Cinta Engomada', 'Combo Cinta Engomada X 2 + Pigmento Al Alcohol Para Goma Eva', 'cinta.jpg', NULL, '2015-06-02 00:00:00', '2015-07-30 00:00:00', 1, 0, NULL);
 
-CREATE TABLE ofertas_realizadas (
+CREATE TABLE `ofertas_realizadas` (
   `id_usuario` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `precio_ofertado` varchar(255) NOT NULL,
   `necesidad_ofertada` varchar(255) NOT NULL,
   `fecha_oferta` datetime NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE = INNODB;
+  `activo` tinyint(1) NOT NULL DEFAULT '0',
+  `es_ganador` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `ofertas_realizadas` (`id_usuario`, `id_producto`, `precio_ofertado`, `necesidad_ofertada`, `fecha_oferta`, `activo`, `es_ganador`) VALUES
+(2, 17, '1500', 'Es el mejor regalo para mi hijo', '2015-06-26 00:31:10', 0, 0);
 
 CREATE TABLE consultas (
   `id` int(11) NOT NULL AUTO_INCREMENT,

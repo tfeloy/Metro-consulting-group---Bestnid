@@ -19,8 +19,8 @@
 	}
 
 	/* Guardo luego de pasar todas las validaciones */
-	$sql = 'INSERT INTO ofertas_realizadas (id_usuario, id_producto, precio_ofertado, necesidad_ofertada, fecha_oferta, activo ) ';
-	$sql .= 'VALUES("'.$_SESSION['user'][0].'","'.$_POST['id_producto'].'","'.$_POST['precio'].'","'.$_POST['necesidad'].'","'.$dia_actual.'","1")';
+	$sql = 'INSERT INTO ofertas_realizadas (id_usuario, id_producto, precio_ofertado, necesidad_ofertada, fecha_oferta, activo, es_ganador ) ';
+	$sql .= 'VALUES("'.$_SESSION['user'][0].'","'.$_POST['id_producto'].'","'.$_POST['precio'].'","'.$_POST['necesidad'].'","'.$dia_actual.'","1","0")';
 	$result = mysqli_query($con,$sql);
 
 	if(!$result)

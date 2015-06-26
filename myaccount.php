@@ -153,10 +153,11 @@
 																	<a href="">';
 																	if(($rowPreg['cant'] == 0) && ($rowOf['cant'] == 0))
 																	{
-																		echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
+    								                    					$editSubasta = 'editsubasta.php?id='.$row['id'];
+																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
 																				<input type="hidden" id="id" name="id" value="'.$row['id'].'" >
 																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
-																				<a href="" OnClick=""><i class="fa fa-edit"></i></a>
+																				<a href="'.$editSubasta.'" OnClick=""><i class="fa fa-edit"></i></a>
 																				
 																			  </form>';
 																	}
@@ -194,7 +195,7 @@
 						  	<div class="panel-body">
 						  		<div class="list-group">
 						  		<?php
-						  		$query = 'SELECT p.id, p.titulo, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" AND o.activo=1';
+						  			$query = 'SELECT p.id, p.titulo, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" AND o.activo=1';
 						  			$result = mysqli_query($con,$query);
 						  			if (mysqli_num_rows($result) > 0)                           
                     				{

@@ -71,6 +71,25 @@
         </div>
         <br>
         <div class="row">
+            <?php
+                if (!empty($_SESSION['mensaje']))
+                {
+                    echo'
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div class="alert alert-dismissible alert-warning">
+                                    <center>
+                                        <strong>'.$_SESSION['mensaje'].'</strong>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                    unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
+                }
+            ?>
+
             <div class="col-lg-12">
                 <?php
                     $query = 'SELECT p.id, p.id_vendedor, p.titulo, p.descripcion, p.imagen, DATE(p.fecha_fin) AS vigencia, c.nombre AS catName FROM productos p INNER JOIN categorias c ON p.id_categoria = c.id WHERE p.activo = 1 AND fecha_fin >= curdate()';
@@ -131,7 +150,7 @@
                                             <h4 class="modal-title" id="myModalLabel">Ofertar</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="#" class="form-horizontal" method="post" id="register-form"> 
+                                            <form action="savedoferta.php" class="form-horizontal" method="post" id="ofertar-form"> 
                                                 <div class="form-group">
                                                     <div class="col-lg-12">
                                                         <textarea name="necesidad" placeholder="Necesidad" class="necesidad form-control" id='necesidad' rows="4"></textarea>
@@ -140,14 +159,14 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-12">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon">$</span>
-                                                            <input class="form-control" type="text" name="precio" placeholder="150,30">
+                                                            <input class="form-control" type="text" name="precio" placeholder="150.30">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="id_producto" value="<?php echo $_GET['id']; ?>">
                                                 <div class="form-group">
                                                     <div class="col-lg-12">
-                                                        <button type="button" class="btn btn-primary btn-block">Ofertar</button>
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Ofertar" /> 
                                                     </div>
                                                 </div>
                                             </form>

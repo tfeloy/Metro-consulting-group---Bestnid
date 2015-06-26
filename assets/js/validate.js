@@ -55,7 +55,8 @@ $(document).ready(function(){
     },
     success: function(element) {
       element
-      .closest('.control-group').removeClass('error');
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
     }
   });
 }); // end document.ready
@@ -117,7 +118,8 @@ $(document).ready(function(){
     },
     success: function(element) {
       element
-      .closest('.control-group').removeClass('error');
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
     }
   });
 }); // end document.ready
@@ -179,7 +181,8 @@ $(document).ready(function(){
     },
     success: function(element) {
       element
-      .closest('.control-group').removeClass('error');
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
     }
   });
 }); // end document.ready
@@ -209,7 +212,8 @@ $(document).ready(function(){
     },
     success: function(element) {
       element
-      .closest('.control-group').removeClass('error');
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
     }
   });
 }); // end document.ready
@@ -228,7 +232,32 @@ $(document).ready(function(){
     },
     success: function(element) {
       element
-      .closest('.control-group').removeClass('error');
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
+    }
+  });
+}); // end document.ready
+
+$(document).ready(function(){
+  $('#ofertar-form').validate(
+  {
+    rules: {
+      necesidad: {
+        minlength: 5,
+        required: true
+      },
+      precio: {
+        number: true,
+        required: true
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.control-group').removeClass('success').addClass('error');
+    },
+    success: function(element) {
+      element
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
     }
   });
 }); // end document.ready

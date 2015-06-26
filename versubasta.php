@@ -129,7 +129,7 @@
                                         $idvendedor = $row['id_vendedor'];
                                         if ($_SESSION['user'][0] == $idvendedor) 
                                         {
-                                            echo '<div class="row"><a class="btn btn-lg btn-warning">No puede ofertar su producto</a></div>';
+                                            echo '<div class="row"><button type="button" class="btn btn-lg btn-warning" data-toggle="popover" data-placement="bottom" data-content="Para ofertar debe estar registrado o iniciar sesión con su cuenta">Ofertar</button></div>';
                                         }
                                         else
                                         {
@@ -226,7 +226,7 @@
                             {
                                 if ($_SESSION['user'][0] == $idvendedor) 
                                 {
-                                    echo '<div class="row"><center><a class="btn btn-lg btn-warning">No puedes preguntar por tus producto</a></center></div>';
+                                    echo '<div class="row"><center><button type="button" class="btn btn-lg btn-danger" data-toggle="popover" data-placement="bottom" data-content="Para poder Preguntar debe estar registrado o iniciar sesión con su cuenta">Preguntar</button></center></div>';
                                 }
                                 else
                                 {
@@ -240,6 +240,7 @@
                                 }
                             }
                             ?>
+
 
                             <!-- Modal -->
                             <div class="modal fade" id="preguntar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -281,5 +282,9 @@
         </div>
         <br>
     </div>
+
+    <script>
+        $("[data-toggle=popover]").popover();
+    </script>
 </body>
 </html>

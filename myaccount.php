@@ -230,7 +230,7 @@
 
 						  		$query = 'SELECT p.id, p.titulo, p.vendido, to_days(p.fecha_fin) - to_days(curdate()) as diferencia, o.es_ganador, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada, o.activo FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" ORDER BY fecha_oferta';
 
-						  			$query = 'SELECT p.id, p.titulo, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" AND o.activo=1';
+						  			//$query = 'SELECT p.id, p.titulo, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" AND o.activo=1';
 
 						  			$result = mysqli_query($con,$query);
 						  			if (mysqli_num_rows($result) > 0)                           

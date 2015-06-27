@@ -179,7 +179,26 @@
 				                                        		
 																echo '</div>
 																<div class="col-xs-2 col-lg-offset-10">';
-																	
+
+																	if(($row['activo'] == 1) && ($row['vendido'] == 0))
+																	{
+																		$editSubasta = 'editsubasta.php?id='.$row['id'];
+																		if ($rowOf['cant'] == 0) 
+																		{
+																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
+																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
+																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
+																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
+																			  </form>';
+																		}
+																		else
+																		{
+																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>';
+																		}
+																	}
+
+
+																	/*
 																	if(($rowOf['cant'] == 0) && ($row['activo'] == 1) && ($row['vendido'] == 0))
 																	{
     								                    					$editSubasta = 'editsubasta.php?id='.$row['id'];
@@ -197,6 +216,7 @@
 																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>';
 																		}
 																	}
+																	*/
 																		
 															echo 	'</div>
 												  			</div>

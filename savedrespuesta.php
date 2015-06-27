@@ -9,7 +9,7 @@
 	$id = $_POST['id_consulta'];
 
 	/* Guardo luego de pasar todas las validaciones */
-	$sql = 'UPDATE consultas SET respuesta="'.$_POST['respuesta'].'", fecha_respuesta="'.$dia_actual.'" WHERE id="'.$id.'"';
+	$sql = 'UPDATE consultas SET respuesta="'.$_POST['respuesta'].'", fecha_respuesta="'.$dia_actual.'", id_vendedor="'.$_POST['id_vendedor'].'" WHERE id="'.$id.'"';
 	$result = mysqli_query($con,$sql);
 
 	if(!$result)
@@ -19,5 +19,5 @@
 		mysqli_close($con);
 	}
 
-	echo '<script type="text/javascript"> window.location = "versubasta.php?id='.$_POST['id_producto'].'"</script>';
+	echo '<script type="text/javascript"> window.location = "mipublicacion.php?id='.$_POST['id_producto'].'"</script>';
 ?>

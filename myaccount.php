@@ -72,13 +72,13 @@
 		            <div class="col-lg-4">
 		            	<div class="panel panel-primary">
 							<div class="panel-heading">
-						    	<h3 class="panel-title"><i class="fa fa-comments"></i> Preguntas realizadas</h3>
+						    	<h3 class="panel-title"><i class="fa fa-comments"></i> Mis Preguntas Realizadas</h3>
 						  	</div>
 						  	<div class="panel-body">
 						  		<div class="list-group">
 						  		<?php
 
-						  			$query = 'SELECT c.id, c.pregunta, c.respuesta, c.fecha_pregunta AS fecha_pregunta, c.fecha_respuesta AS fecha_respuesta, c.id_vendedor, p.titulo, p.id  FROM consultas c INNER JOIN productos p ON (c.id_producto = p.id) WHERE c.id_usuario = "'.$_SESSION['user'][0].'" GROUP BY p.id, c.id';
+						  			$query = 'SELECT c.pregunta, c.respuesta, c.fecha_pregunta AS fecha_pregunta, c.fecha_respuesta AS fecha_respuesta, c.id_vendedor, p.titulo, p.id  FROM consultas c INNER JOIN productos p ON (c.id_producto = p.id) WHERE c.id_usuario = "'.$_SESSION['user'][0].'" AND p.activo=1 AND p.vendido=0 GROUP BY p.id, c.id';
 						  			$result = mysqli_query($con,$query);
 						  			if (mysqli_num_rows($result) > 0)                           
                     				{
@@ -117,19 +117,19 @@
 		            <div class="col-lg-4">
 		            	<div class="panel panel-primary">
 							<div class="panel-heading">
-						    	<h3 class="panel-title"><i class="fa fa-tag"></i> Publicaciones</h3>
+						    	<h3 class="panel-title"><i class="fa fa-tag"></i> Mis Publicaciones</h3>
 						  	</div>
 						  	<div class="panel-body">
 						  		<div class="list-group">
 						  		<?php
-						  			$query = 'SELECT id, titulo FROM productos WHERE id_vendedor="'.$_SESSION['user'][0].'" AND activo=1 AND vendido=0';
+						  			$query = 'SELECT id, titulo, activo, vendido, precio, comision FROM productos WHERE id_vendedor="'.$_SESSION['user'][0].'" ORDER BY fecha_publicacion';
 						  			$result = mysqli_query($con,$query);
 						  			if (mysqli_num_rows($result) > 0)                           
                     				{
                     					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
-                        				{
-                        					$verSubasta = 'versubasta.php?id='.$row['id'];
-                        					
+                        				{                    
+                        					$verPublicacion = 'mipublicacion.php?id='.$row['id'];
+
                         					$queryPreg = 'SELECT COUNT(c.id) AS cant FROM productos p INNER JOIN consultas c ON p.id=c.id_producto WHERE p.id="'.$row[id].'"';
                         					$resPreg = mysqli_query($con,$queryPreg);
                         					
@@ -140,30 +140,62 @@
                         					
                         					$rowOf = mysqli_fetch_array($resOf, MYSQLI_ASSOC);
 
+                        					$queryGanador = 'SELECT u.username FROM ofertas_realizadas o INNER JOIN users u ON o.id_usuario=u.id WHERE o.id_producto="'.$row[id].'"';
+                        					$resGanador = mysqli_query($con,$queryGanador);
+                        					
+                        					$rowGanador = mysqli_fetch_array($resGanador, MYSQLI_ASSOC);
+
                         					echo '<div class="row">
 	                                        			<div class="col-sm-12">
 	                                        				<div class="row">
-	                                        					<div class="col-sm-12">
-				                                        			<a href="'.$verSubasta.'" class="list-group-item">
-				                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
-				                                            			<p class="text-right"><i class="fa fa-comments"></i> '.$rowPreg['cant'].' <i class="fa fa-shopping-cart"></i> '.$rowOf['cant'].' </p>
-																	</a>
-																</div>
-																<div class="col-xs-2 col-lg-offset-10">
-																	<a href="">';
-																	if(($rowPreg['cant'] == 0) && ($rowOf['cant'] == 0))
+	                                        					<div class="col-sm-12">';
+
+	                                        					if($row['activo'] == 0)
+	                                        					{
+	                                        						echo '<div class="bg-danger">
+	                                        								<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+				                                            			  </div>';
+	                                        					}
+	                                        					else
+	                                        					{
+	                                        						if($row['vendido'] == 1)
+	                                        						{
+	                                        							echo '<div class="bg-success">
+	                                        									<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+	                                        									<p class="text-success">Precio venta: <em>$'.$row['precio'].'</em></p>
+	                                        									<p class="text-success">Comision: <em>$'.(string)(((real)($row['precio'])*(real)($row['comision'])/100)).'</em></p>
+	                                        									<p class="text-success">Ganador: <em>'.utf8_encode($rowGanador['username']).'</em></p>
+	                                        									<p class="text-success text-right"><em>VENDIDO</em></p>
+				                                            				</div>';
+	                                        						}
+	                                        						else
+	                                        						{
+	                                        							echo  '<a href="'.$verPublicacion.'" class="list-group-item">
+				                                            					<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+				                                            					<p class="text-right"><i class="fa fa-comments"></i> '.$rowPreg['cant'].' <i class="fa fa-shopping-cart"></i> '.$rowOf['cant'].' </p>
+																	  		  </a>';
+	                                        						}
+	                                        					}
+				                                        		
+																echo '</div>
+																<div class="col-xs-2 col-lg-offset-10">';
+																	
+																	if(($rowOf['cant'] == 0) && ($row['activo'] == 1) && ($row['vendido'] == 0))
 																	{
     								                    					$editSubasta = 'editsubasta.php?id='.$row['id'];
 																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
 																				<input type="hidden" id="id" name="id" value="'.$row['id'].'" >
 																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
-																				<a href="'.$editSubasta.'" OnClick=""><i class="fa fa-edit"></i></a>
+																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
 																				
 																			  </form>';
 																	}
 																	else
 																	{
-																		echo '<a href="" OnClick=""><i class="fa fa-edit"></i></a>';
+																		if(($row['activo'] == 1) && ($row['vendido'] == 0))
+																		{
+																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>';
+																		}
 																	}
 																		
 															echo 	'</div>
@@ -190,28 +222,67 @@
 		            <div class="col-lg-4">
 		            	<div class="panel panel-primary">
 							<div class="panel-heading">
-						    	<h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Ofertas realizadas</h3>
+						    	<h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Mis Ofertas Realizadas</h3>
 						  	</div>
 						  	<div class="panel-body">
 						  		<div class="list-group">
 						  		<?php
+
+						  		$query = 'SELECT p.id, p.titulo, p.vendido, to_days(p.fecha_fin) - to_days(curdate()) as diferencia, o.es_ganador, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada, o.activo FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" ORDER BY fecha_oferta';
+
 						  			$query = 'SELECT p.id, p.titulo, o.fecha_oferta, o.precio_ofertado, o.necesidad_ofertada FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE o.id_usuario="'.$_SESSION['user'][0].'" AND o.activo=1';
+
 						  			$result = mysqli_query($con,$query);
 						  			if (mysqli_num_rows($result) > 0)                           
                     				{
                     					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
                         				{
                         					$verSubasta = 'versubasta.php?id='.$row['id'];
-                        					echo '<a href="'.$verSubasta.'" class="list-group-item">
-                        							<div class="row">
-	                                        			<div class="col-sm-12">
-	                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
-	                                            			<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
-	                                            			<p class="text-success">Precio ofertado: $'.$row['precio_ofertado'].'</em></p>
-	                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
-
-														</div>
-														</div></a>';
+                        					if($row['es_ganador'] == 1)
+                        					{
+                        						 echo '<div class="row bg-success">
+	                        								<div class="col-sm-12">
+		                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+		                                            			<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
+		                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
+		                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
+		                                            			<p class="text-success text-right"><em>GANADO</em></p>
+															</div>
+														  </div>';
+											}
+											else
+											{
+	                        					if(($row['vendido'] == 1) || ($row['activo'] == 0))
+	                        					{
+	                        						/* Si lo gano otro O esta eliminada la oferta */
+	                        						echo '<div class="row bg-danger">
+	                        								<div class="col-sm-12">
+		                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+		                                            			<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
+		                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
+		                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
+		                                            			<p class="text-danger text-right"><em>';
+		                                            			echo ($row['vendido']==1)?"FINALIZADO":"ELIMINADO";
+		                                            			echo '</em></p>
+															</div>
+														  </div>';
+														 
+	                        					}
+	                        					else
+	                        					{
+	                        						echo '<a href="'.$verSubasta.'" class="list-group-item">
+	                        								<div class="row">
+	                        									<div class="col-sm-12">
+			                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
+			                                            			<p class="text-info text-center"><em>'.utf8_encode($row['necesidad_ofertada']).'</em></p>
+			                                            			<p class="text-success">Precio ofertado: $'.$row['precio_ofertado'].'</em></p>
+			                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
+			                                            			<p class="text-success text-right">Faltan: <em>'.$row['diferencia'].'</em> días.</p>
+																</div>
+															</div>
+														  </a>';
+	                        					}
+	                        				}
                         				}
                         			}
                         			else

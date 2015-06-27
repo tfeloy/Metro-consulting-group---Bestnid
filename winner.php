@@ -79,11 +79,13 @@
 
                         while ($row = mysqli_fetch_array($resOf, MYSQLI_ASSOC))                               
                         {
+                                                                        
+                            $gano = 'thewinner.php?id_producto='.$row['id_producto'].'&id_usuario='.$row['id_usuario'];
                             echo '
                             <tr>
                                 <td>'.utf8_encode($row['titulo']).'</td>
                                 <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
-                                <td><a href="#" class="btn btn-primary btn-xs">Seleccionar como ganador</a></td>
+                                <td><a href="'.$gano.'" class="btn btn-primary btn-xs">Seleccionar como ganador</a></td>
                             </tr>';
 
                         }

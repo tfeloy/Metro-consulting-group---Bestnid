@@ -193,7 +193,9 @@
 																		}
 																		else
 																		{
-																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>';
+																			$seleccionarwinner = 'winner.php?=id'.$row['id'];
+																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
+																			<a href="'.$seleccionarwinner.'"><i class="fa fa-eye"></i></a>';
 																		}
 																	}
 

@@ -136,7 +136,7 @@
                                     unset($_SESSION['sub']); //Elimino la variable de session luego de imprimirla
                                 }
                             ?>
-                            
+                            <input type="text" name="art_imagen" value="<?php echo $myrow['imagen']; ?>">                            
                             <input type="hidden" name="id_art" value="<?php echo $_GET['id']; ?>">
 
                             <div class="form-group">
@@ -154,21 +154,64 @@
             }
             else
             {
-                /* ARMO EL UPDATE */
-
-                $sqlUpdate = 'UPDATE productos SET titulo = "'.$_POST['titulo'].'", descripcion = "'.$_POST['descripcion'].'", id_categoria = "'.$_POST['categoria'].'" WHERE id = '.$_POST['id_art'];
-                $resultUpdate = mysqli_query($con,$sqlUpdate);
-
-                if(!$resultUpdate)
+                $contador = 0;
+                if (!empty($_FILES['archivo1']['name']))
                 {
-                    $_SESSION['mensaje'] = mysqli_error();
-                    mysqli_free_result($resultUpdate);
-                    mysqli_close($con);
+                    $archivo1 = $_FILES['archivo1']['name'];
+                    $prefijo1 = substr(md5(uniqid(rand())),0,7);
+                    $tamano = $_FILES['archivo1']['size'];
+                    if ($tamano > 2000000){
+                        $contador++;
+                    }
+                }
+                else
+                {
+                    $imagenvieja = 1;
                 }
 
-                /* Redirecciones a Success.php con un lindo mensaje :-) */
-                $_SESSION['mensaje'] = 'La publicación del producto se modifico exitosamente';
-                echo '<script type="text/javascript"> window.location = "success.php"</script>';
+                if($contador > 0)
+                {
+                    $_SESSION['mensaje'] = 'El archivo Nro 1. supera los 2 Mb';
+                    echo '<script type="text/javascript"> window.location = "success.php"</script>';
+                }
+                else 
+                {
+                    if ($imagenvieja == 1) {
+                        $nameArch1 = $_POST['art_imagen'];
+                    }
+                    else
+                    {
+                        $image_types = array
+                        ( 
+                            // JPEG 
+                            'image/jpeg'        => '.jpeg', 
+                            'image/jpg'        => '.jpg', 
+                            // (A)PNG (Animated) Portable Network Graphics 
+                            'image/png'        => '.png',           
+                        );
+
+                        $extension1 = $_FILES['archivo1']['type'];
+                        $nameArch1 = date("Y-m-d")."-P".$prefijo1."-Sub".$image_types[$extension1];     
+                        $destino =  "uploads/".$nameArch1;
+                        copy($_FILES['archivo1']['tmp_name'],$destino);
+                    }
+
+                    /* ARMO EL UPDATE */
+
+                    $sqlUpdate = 'UPDATE productos SET titulo = "'.$_POST['titulo'].'", descripcion = "'.$_POST['descripcion'].'", id_categoria = "'.$_POST['categoria'].'", imagen = "'.$nameArch1.'" WHERE id = '.$_POST['id_art'];
+                    $resultUpdate = mysqli_query($con,$sqlUpdate);
+
+                    if(!$resultUpdate)
+                    {
+                        $_SESSION['mensaje'] = mysqli_error();
+                        mysqli_free_result($resultUpdate);
+                        mysqli_close($con);
+                    }
+
+                    /* Redirecciones a Success.php con un lindo mensaje :-) */
+                    $_SESSION['mensaje'] = 'La publicación del producto se modifico exitosamente';
+                    echo '<script type="text/javascript"> window.location = "success.php"</script>';
+                }
             }
 
             ?>

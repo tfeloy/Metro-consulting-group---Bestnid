@@ -184,7 +184,7 @@
 																	{
     								                    					$editSubasta = 'editsubasta.php?id='.$row['id'];
 																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
-																				<input type="hidden" id="id" name="id" value="'.$row['id'].'" >
+																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
 																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
 																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
 																				

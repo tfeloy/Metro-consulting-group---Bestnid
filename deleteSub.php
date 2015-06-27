@@ -1,7 +1,7 @@
 <?php 
 	include('conex.php');
 	$con = Conectarse();	
-	session_start();												/* Dia de hoy */
+	session_start();												
 	
 	/* Guardo luego de pasar todas las validaciones */
 	$sql = 'UPDATE productos SET activo=0 WHERE id="'.$_POST['id'].'"';

@@ -54,35 +54,83 @@
     </div>
     <div class="container">   
         <div class="col-lg-12">
-            <?php 
-                
-                //$queryOf = 'SELECT COUNT(o.id_usuario) AS cant FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id="'.$row[id].'" AND o.activo=1';
+            <?php       
+                // UPDATE ofertas_realizadas set es_ganador = 1 WHERE id_usuario = 9 AND id_producto = 15          
                 $queryOf = 'SELECT p.titulo, p.descripcion, o.* FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id = '.$_GET['id'].' AND o.activo = 1';
                 $resOf = mysqli_query($con,$queryOf);
 
                 if (mysqli_num_rows($resOf) > 0)                           
                 {
-                    echo '
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                            <tr>
-                                <th>Necesidades</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                    <tbody>';
+                    $query = 'SELECT * FROM ofertas_realizadas WHERE id_producto = '.$_GET['id'].' AND activo = 1 AND es_ganador = 0';
+                    $result = mysqli_query($con,$query);
 
-                    while ($row = mysqli_fetch_array($resOf, MYSQLI_ASSOC))                               
+                    if (mysqli_num_rows($resOf) == mysqli_num_rows($result))
                     {
                         echo '
-                        <tr>
-                            <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
-                            <td>Column content</td>
-                        </tr>';
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Necesidades</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                        <tbody>';
 
+                        while ($row = mysqli_fetch_array($resOf, MYSQLI_ASSOC))                               
+                        {
+                            echo '
+                            <tr>
+                                <td>'.utf8_encode($row['titulo']).'</td>
+                                <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
+                                <td><a href="#" class="btn btn-primary btn-xs">Seleccionar como ganador</a></td>
+                            </tr>';
+
+                        }
+                        echo '</tbody></table>';
                     }
-                    echo '</tbody></table>';
+                    else
+                    {
+                        echo '
+                        <h3>Ya eligio un ganador</h3>
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Necesidades</th>
+                                    <th>Gano</th>
+                                </tr>
+                            </thead>
+                        <tbody>';
+
+                        while ($row = mysqli_fetch_array($resOf, MYSQLI_ASSOC))                               
+                        {
+                            echo '
+                            <tr>
+                                <td>'.utf8_encode($row['titulo']).'</td>
+                                <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
+                                <td>';
+                                if ($row['es_ganador'] == 1) {
+                                    echo '<i class="fa fa-check text-success"></i>';
+                                }
+                                else
+                                {
+                                    echo '<i class="fa fa-times text-danger"></i>';
+                                }
+                                echo '</td>
+                            </tr>';
+
+                        }
+                        echo '</tbody></table>';
+                    }
                 }
+
+                echo '
+                <div class="row">
+                    <center>
+                        <a href="myaccount.php" class="btn btn-danger btn-lg">Volver</a>
+                    </center>
+                </div>';
 
             ?>
         </div>

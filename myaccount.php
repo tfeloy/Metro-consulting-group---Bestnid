@@ -262,13 +262,19 @@
                         					$verSubasta = 'versubasta.php?id='.$row['id'];
                         					if($row['es_ganador'] == 1)
                         					{
-                        						 echo '<div class="row bg-success">
-	                        								<div class="col-sm-12">
-		                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
-		                                            			<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
-		                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
-		                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
-		                                            			<p class="text-success text-right"><em>GANADO</em></p>
+                        						 echo '<div class="row">
+                        						 			<div class="col-sm-10 col-sm-offset-1">
+															<div class="panel panel-success">
+  																<div class="panel-heading">
+    																<h3 class="panel-title">'.utf8_encode($row['titulo']).'</h3>
+  																</div>
+  																<div class="panel-body">
+    																<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
+			                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
+			                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
+			                                            			<p class="text-success text-right"><em>GANADO</em></p>
+  																</div>
+															</div>
 															</div>
 														  </div>';
 											}
@@ -277,18 +283,23 @@
 	                        					if(($row['vendido'] == 1) || ($row['activo'] == 0))
 	                        					{
 	                        						/* Si lo gano otro O esta eliminada la oferta */
-	                        						echo '<div class="row bg-danger">
-	                        								<div class="col-sm-12">
-		                                            			<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
-		                                            			<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
-		                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
-		                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
-		                                            			<p class="text-danger text-right"><em>';
-		                                            			echo ($row['vendido']==1)?"FINALIZADO":"ELIMINADO";
-		                                            			echo '</em></p>
+	                        						echo '<div class="row">
+                        						 			<div class="col-sm-10 col-sm-offset-1">
+															<div class="panel panel-danger">
+  																<div class="panel-heading">
+    																<h3 class="panel-title">'.utf8_encode($row['titulo']).'</h3>
+  																</div>
+  																<div class="panel-body">
+    																<p class="text-info text-center"><em>'.$row['necesidad_ofertada'].'</em></p>
+			                                            			<p class="text-success">Precio ofertado: <em>$'.$row['precio_ofertado'].'</em></p>
+			                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
+			                                            			<p class="text-danger text-right"><em>';
+			                                            			echo ($row['vendido']==1)?"FINALIZADO":"ELIMINADO";
+			                                            			echo '</em></p>
+  																</div>
+															</div>
 															</div>
 														  </div>';
-														 
 	                        					}
 	                        					else
 	                        					{

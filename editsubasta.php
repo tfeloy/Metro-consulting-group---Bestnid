@@ -136,7 +136,7 @@
                                     unset($_SESSION['sub']); //Elimino la variable de session luego de imprimirla
                                 }
                             ?>
-                            <input type="text" name="art_imagen" value="<?php echo $myrow['imagen']; ?>">                            
+                            <input type="hidden" name="art_imagen" value="<?php echo $myrow['imagen']; ?>">                            
                             <input type="hidden" name="id_art" value="<?php echo $_GET['id']; ?>">
 
                             <div class="form-group">

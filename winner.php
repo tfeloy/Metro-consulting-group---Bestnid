@@ -56,7 +56,7 @@
         <div class="col-lg-12">
             <?php       
                 // UPDATE ofertas_realizadas set es_ganador = 1 WHERE id_usuario = 9 AND id_producto = 15          
-                $queryOf = 'SELECT p.titulo, p.descripcion, o.* FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id = '.$_GET['id'].' AND o.activo = 1';
+                $queryOf = 'SELECT p.titulo, p.descripcion, o.* FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id = '.$_GET['id'].' AND o.activo = 1 AND DATE(p.fecha_fin) < DATE(NOW())';
                 $resOf = mysqli_query($con,$queryOf);
 
                 if (mysqli_num_rows($resOf) > 0)                           
@@ -113,7 +113,7 @@
                                 <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
                                 <td>';
                                 if ($row['es_ganador'] == 1) {
-                                    echo '<i class="fa fa-check text-success"></i>';
+                                    echo '<i class="fa fa-check text-success"></i> $'.$row['precio_ofertado'];
                                 }
                                 else
                                 {
@@ -125,6 +125,10 @@
                         }
                         echo '</tbody></table>';
                     }
+                }
+                else
+                {
+                    echo 'Aun no puede elegir un ganador';
                 }
 
                 echo '

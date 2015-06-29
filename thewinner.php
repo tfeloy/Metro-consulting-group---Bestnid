@@ -69,15 +69,16 @@
 
                 /* Envio el mail */ 
 
+                /*
+                
+                // Lo comento sino me tapa la casilla de mails jaja
+
                 $to = 'nrejep@e-gate.com.ar';
                 $subject = 'Notificaciones Bestnid';
                 $message = 'Es el ganador del producto';
                 $from = "From: Notificaciones Bestnid <ytagcom@gmail.com>";
                 mail($to,$subject,$message,$from);
-
-
-
-
+                */
 
                 /* Redirecciones a Success.php con un lindo mensaje :-) */
                 $_SESSION['mensaje'] = 'Se eligio al ganador del producto';

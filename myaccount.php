@@ -187,7 +187,7 @@
 																		{
 																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
 																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
-																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
+																				<button type="button" class="button-Icon" data-toggle="modal" data-target="#DeleteConfirm"><i class="fa fa-trash"></i></button>
 																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
 																			  </form>';
 																		}
@@ -206,7 +206,7 @@
     								                    					$editSubasta = 'editsubasta.php?id='.$row['id'];
 																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
 																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
-																				<a href="javascript:void()" OnClick="document.getElementById(\'delete-form\').submit();"><i class="fa fa-trash"></i></a>
+																				<a href="javascript:void()" data-toggle="modal" data-target="DeleteConfirm"><i class="fa fa-trash"></i></a>
 																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
 																				
 																			  </form>';
@@ -241,6 +241,28 @@
 						  	</div>
 						</div>
 		            </div>
+
+		            <!-- Modal -->
+					<div class="modal fade" id="DeleteConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">Eliminar Publicación</h4>
+					      </div>
+					      <div class="modal-body">
+					        <p>¿Está seguro que desea eliminar esta publicación?</p>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					        <button type="button" class="btn btn-primary" OnClick="document.getElementById('delete-form').submit();"><i class="fa fa-trash"></i> Eliminar</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- end Modal -->
+
+
 		            <div class="col-lg-4">
 		            	<div class="panel panel-primary">
 							<div class="panel-heading">

@@ -36,6 +36,14 @@ label.valid {
     text-indent: -9999px;
 }
 
+.button-Icon
+{
+    padding: 0;
+    background: none;
+    border: none;
+    color: #d9230f;
+}
+
 
 /*
 

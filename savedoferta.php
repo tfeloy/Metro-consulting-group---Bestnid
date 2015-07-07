@@ -18,6 +18,13 @@
         die(); 
 	}
 
+	if((real)($_POST['precio']) < 1)
+	{
+		$_SESSION['mensaje'] = 'El precio mínimo permitido es $1';
+		echo '<script type="text/javascript"> window.location = "versubasta.php?id='.$_POST['id_producto'].'"</script>';
+        die();
+	}
+
 	/* Guardo luego de pasar todas las validaciones */
 	$sql = 'INSERT INTO ofertas_realizadas (id_usuario, id_producto, precio_ofertado, necesidad_ofertada, fecha_oferta, activo, es_ganador ) ';
 	$sql .= 'VALUES("'.$_SESSION['user'][0].'","'.$_POST['id_producto'].'","'.$_POST['precio'].'","'.$_POST['necesidad'].'","'.$dia_actual.'","1","0")';

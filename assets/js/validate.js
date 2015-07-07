@@ -248,6 +248,7 @@ $(document).ready(function(){
       },
       precio: {
         number: true,
+        min: 1,
         required: true
       }
     },

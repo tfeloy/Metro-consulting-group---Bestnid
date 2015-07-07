@@ -130,17 +130,17 @@
                         				{                    
                         					$verPublicacion = 'mipublicacion.php?id='.$row['id'];
 
-                        					$queryPreg = 'SELECT COUNT(c.id) AS cant FROM productos p INNER JOIN consultas c ON p.id=c.id_producto WHERE p.id="'.$row[id].'"';
+                        					$queryPreg = 'SELECT COUNT(c.id) AS cant FROM productos p INNER JOIN consultas c ON p.id=c.id_producto WHERE p.id="'.$row['id'].'"';
                         					$resPreg = mysqli_query($con,$queryPreg);
                         					
                         					$rowPreg = mysqli_fetch_array($resPreg, MYSQLI_ASSOC);
 
-											$queryOf = 'SELECT COUNT(o.id_usuario) AS cant FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id="'.$row[id].'" AND o.activo=1';
+											$queryOf = 'SELECT COUNT(o.id_usuario) AS cant FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id="'.$row['id'].'" AND o.activo=1';
                         					$resOf = mysqli_query($con,$queryOf);
                         					
                         					$rowOf = mysqli_fetch_array($resOf, MYSQLI_ASSOC);
 
-                        					$queryGanador = 'SELECT u.username FROM ofertas_realizadas o INNER JOIN users u ON o.id_usuario=u.id WHERE o.id_producto="'.$row[id].'"';
+                        					$queryGanador = 'SELECT u.username FROM ofertas_realizadas o INNER JOIN users u ON o.id_usuario=u.id WHERE o.id_producto="'.$row['id'].'"';
                         					$resGanador = mysqli_query($con,$queryGanador);
                         					
                         					$rowGanador = mysqli_fetch_array($resGanador, MYSQLI_ASSOC);
@@ -194,8 +194,7 @@
 																		else
 																		{
 																			$seleccionarwinner = 'winner.php?id='.$row['id'];
-																			echo '<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
-																			<a href="'.$seleccionarwinner.'"><i class="fa fa-eye"></i></a>';
+																			echo '<a href="'.$seleccionarwinner.'"><i class="fa fa-eye"></i></a>';
 																		}
 																	}
 

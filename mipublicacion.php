@@ -150,7 +150,7 @@
 						  	<div class="panel-body">
 						  		<div class="list-group">
 						  			<?php
-						  				$query = 'SELECT c.id, c.pregunta, c.respuesta, c.fecha_pregunta AS fecha_pregunta, c.fecha_respuesta AS fecha_respuesta, c.id_vendedor, u.username FROM consultas c LEFT JOIN users u ON c.id_usuario=u.id WHERE c.id_producto="'.$idProducto.'"';
+						  				$query = 'SELECT id, pregunta, respuesta, fecha_pregunta AS fecha_pregunta, fecha_respuesta AS fecha_respuesta, id_vendedor FROM consultas WHERE id_producto="'.$idProducto.'"';
 							  			$result = mysqli_query($con,$query);
 							  			if (mysqli_num_rows($result) > 0)                           
 	                    				{
@@ -158,7 +158,6 @@
 	                        				{
 	                        					echo '<div class="row">
 		                                        			<div class="col-sm-10 col-lg-offset-1 list-group-item">
-		                                        				<small class="text-info"><em>'.utf8_encode($row['username']).'</em></small>
 		                                            			<i class="fa fa-comments"></i> <strong>'.utf8_encode($row['pregunta']).'</strong>
 		                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_pregunta'])).'</em></p>
 															</div>';

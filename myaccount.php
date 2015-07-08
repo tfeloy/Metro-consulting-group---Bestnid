@@ -187,14 +187,14 @@
 																		{
 																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
 																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
-																				<button type="button" class="button-Icon" data-toggle="modal" data-target="#DeleteConfirm"><i class="fa fa-trash"></i></button>
-																				<a href="'.$editSubasta.'"><i class="fa fa-edit"></i></a>
+																				<button type="button" class="button-Icon" data-toggle="modal" data-target="#DeleteConfirm" title="Eliminar"><i class="fa fa-trash"></i></button>
+																				<a href="'.$editSubasta.'" title="Editar Publicación"><i class="fa fa-edit"></i></a>
 																			  </form>';
 																		}
 																		else
 																		{
 																			$seleccionarwinner = 'winner.php?id='.$row['id'];
-																			echo '<a href="'.$seleccionarwinner.'"><i class="fa fa-eye"></i></a>';
+																			echo '<a href="'.$seleccionarwinner.'" title="Elegir Ganador"><i class="fa fa-eye"></i></a>';
 																		}
 																	}
 
@@ -333,8 +333,13 @@
 			                                            			<p class="text-success">Fecha: <em>'.date("d-m-Y", strtotime($row['fecha_oferta'])).'</em></p>
 			                                            			<p class="text-success text-right">Faltan: <em>'.$row['diferencia'].'</em> días.</p>
 																</div>
+														  	</div>
+														  </a>
+														  <div class="row">
+															<div class="col-xs-2 col-lg-offset-10">
+																<a href="'.$editOferta.'" title="Editar Monto"><i class="fa fa-edit"></i></a>
 															</div>
-														  </a>';
+														  </div>';
 	                        					}
 	                        				}
                         				}

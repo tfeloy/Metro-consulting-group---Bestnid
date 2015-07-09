@@ -324,6 +324,7 @@
 	                        					}
 	                        					else
 	                        					{
+	                        						$editOferta = 'editMonto.php?id='.$row['id'];
 	                        						echo '<a href="'.$verSubasta.'" class="list-group-item">
 	                        								<div class="row">
 	                        									<div class="col-sm-12">

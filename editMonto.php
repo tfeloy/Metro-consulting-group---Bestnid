@@ -84,7 +84,7 @@
                                 <div class="col-lg-2"><label for="inputMonto" class="control-label">Precio Ofertado</label></div>
                                 <div class="col-lg-10">
                                     <div class="input-group" name="inputMonto">
-                                        <input class="form-control" type="text" name="precio" placeholder="150.30">
+                                        <input class="form-control" type="text" name="precio" value=<?php echo '"'.$myrow['precio_ofertado'].'"' ?>>
                                     </div>
                                 </div>
                             </div>

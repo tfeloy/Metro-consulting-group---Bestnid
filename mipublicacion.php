@@ -15,6 +15,7 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/validate.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -172,21 +173,23 @@
 														}
 														else
 														{
-															echo '<form action="savedrespuesta.php" class="form-horizontal" method="post" id="respuesta-form">
+															?>
+																<form action="savedrespuesta.php" class="form-horizontal" method="post" id="respuesta-form" enctype="multipart/form-data">
 																	<div class="form-group">
 			                                                    		<div class="col-lg-10 col-lg-offset-1">
-			                                                        		<input type="text" name="respuesta" placeholder="Responda la consulta" class="respuesta form-control" id="respuesta">
+			                                                        		<input type="text" name="respuesta" placeholder="Responda la consulta" class="form-control">
 			                                                    		</div>
 				                                                	</div>
-				                                                	<input type="hidden" name="id_producto" value="'.$idProducto.'">
-				                                                	<input type="hidden" name="id_consulta" value="'.$row['id'].'">
-				                                                	<input type="hidden" name="id_vendedor" value="'.$_SESSION['user'][0].'">
+				                                                	<input type="hidden" name="id_producto" value=<?php echo '"'.$idProducto.'"'; ?>>
+				                                                	<input type="hidden" name="id_consulta" value=<?php echo '"'.$row['id'].'"'; ?>>
+				                                                	<input type="hidden" name="id_vendedor" value=<?php echo '"'.$_SESSION['user'][0].'"'; ?> >
 				                                                <div class="form-group">
 				                                                    <div class="col-lg-10 col-lg-offset-1">
 				                                                        <input type="submit" class="btn btn-primary btn-block btn-xs" value="Responder"/> 
 				                                                    </div>
 				                                                </div>
 				                                                </form>';
+				                                        <?php
 														}
 														echo "</div>";
 	                        				}

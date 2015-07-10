@@ -53,22 +53,7 @@
             </ul>
         </div>
     </div>
-    <div class="container">   
-		<?php 
-			// Si es 1 es ADMIN sino si es 0 USER NORMAL
-			if($_SESSION['user'][9] == 1)
-			{
-				?>
-				<div class="row">
-		            <div class="col-lg-4">
-						<a href="registroadmin.php" class="btn btn-primary">Agregar Usuario</a>
-		            </div>
-		        </div>
-				<?php
-			}
-			else
-			{
-				?>
+    <div class="container">  
 				<div class="row">
 					<div class="col-lg-4">
 		            	<div class="panel panel-primary">
@@ -174,21 +159,21 @@
 														else
 														{
 															?>
-																<form action="savedrespuesta.php" class="form-horizontal" method="post" id="respuesta-form" enctype="multipart/form-data">
-																	<div class="form-group">
-			                                                    		<div class="col-lg-10 col-lg-offset-1">
-			                                                        		<input type="text" name="respuesta" placeholder="Responda la consulta" class="form-control">
+																<form action="savedrespuesta.php" class="form-horizontal" method="post" id="responderConsulta-form">
+																	<div class="form-group">	
+																		<div class="col-lg-10 col-lg-offset-1">
+			                                                        		<input type="text" id="respuesta" name="respuesta" placeholder="Responda la consulta" class="respuesta form-control">
 			                                                    		</div>
 				                                                	</div>
-				                                                	<input type="hidden" name="id_producto" value=<?php echo '"'.$idProducto.'"'; ?>>
-				                                                	<input type="hidden" name="id_consulta" value=<?php echo '"'.$row['id'].'"'; ?>>
-				                                                	<input type="hidden" name="id_vendedor" value=<?php echo '"'.$_SESSION['user'][0].'"'; ?> >
-				                                                <div class="form-group">
-				                                                    <div class="col-lg-10 col-lg-offset-1">
-				                                                        <input type="submit" class="btn btn-primary btn-block btn-xs" value="Responder"/> 
-				                                                    </div>
-				                                                </div>
-				                                                </form>';
+										                            <input type="hidden" name="id_producto" value="<?php echo $idProducto; ?>">
+		                                                			<input type="hidden" name="id_consulta" value="<?php echo $row['id']; ?>">
+		                                                			<input type="hidden" name="id_vendedor" value="<?php echo $_SESSION['user'][0]; ?>">
+				                                                	<div class="form-group">	
+				                                                		<div class="col-lg-10 col-lg-offset-1">
+					                                                        <input type="submit" class="btn btn-primary btn-block btn-xs" value="Responder"/> 
+					                                                    </div>
+				                                                	</div>
+				                                                </form>
 				                                        <?php
 														}
 														echo "</div>";
@@ -204,12 +189,7 @@
 						  	</div>
 						</div>
 		            </div>
-		           
-		            
 		        </div>
-				<?php
-			}
-		?>
     </div>
 </body>
 </html>

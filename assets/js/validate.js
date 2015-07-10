@@ -313,7 +313,8 @@ $(document).ready(function(){
 }); // end document.ready
 
 $(document).ready(function(){
-  $('#respuesta-form').validate(
+    var count = 4;
+  $('#responderConsulta-form').validate(
   {
     rules: {
       respuesta: {

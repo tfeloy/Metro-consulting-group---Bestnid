@@ -8,6 +8,7 @@
         case 1:
             # AGREGAR
             /* Guardo luego de pasar todas las validaciones */
+            /*
             $sql = 'INSERT INTO categorias (nombre) ';
             $sql .= 'VALUES("'.$_POST['categoria'].'")';
             $result = mysqli_query($con,$sql);
@@ -22,11 +23,12 @@
             {
                 $_SESSION['mensaje'] = "La categoria ".$_POST['categoria']." se creo de manera correcta";
             }
-            echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
+            */
+            echo '<script type="text/javascript"> window.location = "listarproductos.php"</script>';
             break;
         case 2:
             # EDITAR
-
+            /*
             $sqlCatExiste = 'SELECT 1 FROM categorias WHERE nombre = "'.$_POST['categoria'].'" LIMIT 1';
             $resCatExiste = mysqli_query($con,$sqlCatExiste);
             if (mysqli_fetch_row($resCatExiste)) 
@@ -51,13 +53,13 @@
             }
             mysqli_free_result($result2);
             mysqli_close($con);
-            echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
-
+            */
+            echo '<script type="text/javascript"> window.location = "listarproductos.php"</script>';
             break;
         case 3:
             # BORRAR
             
-            $sql = 'DELETE FROM categorias WHERE id = '.$_POST['categoria'];
+            $sql = 'UPDATE productos SET activo = 0 WHERE id = '.$_POST['producto'];            
             $result = mysqli_query($con,$sql);
 
             if(!$result)
@@ -68,9 +70,10 @@
             }
             else
             {
-                $_SESSION['mensaje'] = "La categoria se borro de manera correcta";
+                $_SESSION['mensaje'] = "El Producto se borro de manera correcta";
             }
-            echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
+            echo '<script type="text/javascript"> window.location = "listarproductos.php"</script>';
             break;
-    } 
+    }
+    
 ?>

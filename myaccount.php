@@ -59,9 +59,10 @@
 			{
 				?>
 				<div class="row">
-		            <div class="col-lg-4">
+		            <div class="col-lg-12">
 						<a href="registroadmin.php" class="btn btn-primary">Agregar Usuario</a>
 						<a href="listarcategorias.php" class="btn btn-primary">Listar Categorias</a>
+						<a href="listarproductos.php" class="btn btn-primary">Listar Productos</a>
 		            </div>
 		        </div>
 				<?php

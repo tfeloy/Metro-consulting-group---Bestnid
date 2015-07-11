@@ -61,6 +61,7 @@
 				<div class="row">
 		            <div class="col-lg-4">
 						<a href="registroadmin.php" class="btn btn-primary">Agregar Usuario</a>
+						<a href="listarcategorias.php" class="btn btn-primary">Listar Categorias</a>
 		            </div>
 		        </div>
 				<?php

@@ -26,13 +26,37 @@
             break;
         case 2:
             # EDITAR
-            
+
+            $sqlCatExiste = 'SELECT 1 FROM categorias WHERE nombre = "'.$_POST['categoria'].'" LIMIT 1';
+            $resCatExiste = mysqli_query($con,$sqlCatExiste);
+            if (mysqli_fetch_row($resCatExiste)) 
+            {
+                mysqli_free_result($resCatExiste);
+                mysqli_close($con);
+                $_SESSION['mensaje'] = 'La Categoria '.$_POST['categoria'].' ya esta en uso, por favor use otro';
+                echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
+                die(); 
+            }
+
+            $sql2 = 'UPDATE categorias SET nombre = "'.$_POST['categoria'].'" WHERE id = '.$_POST['id_categoria'];            
+            $result2 = mysqli_query($con,$sql2);
+
+            if(!$result2)
+            {
+                $_SESSION['mensaje'] = mysqli_error();
+            }
+            else
+            {
+                $_SESSION['mensaje'] = "La categoria ".$_POST['categoria']." se modifico de manera correcta";
+            }
+            mysqli_free_result($result2);
+            mysqli_close($con);
+            echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
+
             break;
         case 3:
             # BORRAR
             
-            echo "Borro ".$_POST['categoria'];
-
             $sql = 'DELETE FROM categorias WHERE id = '.$_POST['categoria'];
             $result = mysqli_query($con,$sql);
 

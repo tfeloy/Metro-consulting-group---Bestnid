@@ -76,8 +76,8 @@
 				        ?>
 					</div>
 		            <div class="col-md-12">
-			            <h3>Categorias</h3>
-			            <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModalCat" title="Agregar Categoria"><i class="fa fa-plus"> Agregar Categoria</i></a>
+			            <h3>Categorías</h3>
+			            <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModalCat" title="Agregar Categoría"><i class="fa fa-plus"> Agregar Categoría</i></a>
 
 						<div class="modal fade" id="myModalCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                           <div class="modal-dialog" role="document">
@@ -130,7 +130,7 @@
 
 								      if ($row_cat['Cant'] == 0) {
 								      	echo '
-                                    	<a class="btn btn-link" data-toggle="modal" data-target="#myModal'.$row_cat['id'].'"><i class="fa fa-trash-o text-danger"></i></a>';
+                                    	<a class="btn btn-link" title="Eliminar Categoría" data-toggle="modal" data-target="#myModal'.$row_cat['id'].'"><i class="fa fa-trash-o text-danger"></i></a>';
                                     	echo '
 									    <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR LA CATEGORIA -->
 		                                <div class="modal fade" id="myModal'.$row_cat['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -138,12 +138,12 @@
 	    										<div class="modal-content">
 	      											<div class="modal-header">
 	        											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	        											<h4 class="modal-title">Modal title</h4>
+	        											<h4 class="modal-title">Eiminar la Categoría</h4>
 	      											</div>
 	      											<div class="modal-body">
 	        											<form action="savedcategoria.php" method="post"> 
 			                                        		<center>
-				                                            	<p class="lead">¿Está seguro que desea eliminar la categoria: <strong>"'.utf8_encode($row_cat['nombre']).'"</strong>?</p>
+				                                            	<p class="lead">¿Está seguro que desea eliminar la categoría: <strong>"'.utf8_encode($row_cat['nombre']).'"</strong>?</p>
 								                        		<input type="hidden" name="categoria" value="'.$row_cat['id'].'">
 								                        		<input type="hidden" name="tipo" value="3">
 				                                        		<button type="button" class="btn btn-info" data-dismiss="modal">No</button>
@@ -155,10 +155,35 @@
 	  										</div>
 		                                </div>';
 								      }
-								      echo '<a href="'.$editCategoria.'" class="btn btn-link" title="Editar Categoria"><i class="fa fa-edit"></i></a>';
+								      echo '<a class="btn btn-link" title="Editar Categoría" data-toggle="modal" data-target="#myModalEdit'.$row_cat['id'].'"><i class="fa fa-edit text-danger"></i></a>';
+								      echo '
+									    <!-- MODAL PARA LA MODIFICAR LA CATEGORIA -->
+		                                <div class="modal fade" id="myModalEdit'.$row_cat['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		                                	<div class="modal-dialog">
+	    										<div class="modal-content">
+	      											<div class="modal-header">
+	        											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	        											<h4 class="modal-title">Modificar Categoría</h4>
+	      											</div>
+	      											<div class="modal-body">
+	        											<form action="savedcategoria.php" method="post" id="modcategoria-form"> 
+			                                        		<center>
+			                                        			<div class="form-group">
+								                        			<input type="text" class="form-control" name="categoria" value="'.utf8_encode($row_cat['nombre']).'" required>
+								                        			<input type="hidden" name="id_categoria" value="'.$row_cat['id'].'">
+								                        			<input type="hidden" name="tipo" value="2">
+								                        		</div>
+								                        		<div class="form-group">
+				                                        			<button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+			                                            			<input type="submit" class="btn btn-primary" value="Modificar" /> 
+			                                            		</div>
+				                                        	</center>
+				                                		</form>
+	      											</div>
+	    										</div>
+	  										</div>
+		                                </div>';
 								    echo '</tr>';
-
-								    
 		                        }
 		                        echo "</tbody></table>";
 		                    }

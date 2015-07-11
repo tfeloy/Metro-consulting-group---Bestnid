@@ -61,23 +61,23 @@
 			{
 				?>
 				<div class="row">
+					<div class="col-md-12">
+						<?php
+				            if (!empty($_SESSION['mensaje']))
+				            {
+								echo'<div class="alert alert-dismissible alert-success">
+  									<button type="button" class="close" data-dismiss="alert">×</button>
+  									<center>
+				                        <strong>'.$_SESSION['mensaje'].'</strong>
+				                    </center>
+								</div>';
+				                unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
+				            }
+				        ?>
+					</div>
 		            <div class="col-md-12">
-		                <h3>Categorias</h3>
-		                <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModalCat" title="Agregar Categoria"><i class="fa fa-plus"> Agregar Categoria</i></a>
-
-		                <?php
-			                if (!empty($_SESSION['mensaje']))
-			                {
-			                    echo'<div class="col-lg-12">
-			                            <div class="alert alert-dismissible alert-success">
-			                            <center>
-			                                <strong>'.$_SESSION['mensaje'].'</strong>
-			                            </center>
-			                            </div>
-			                        </div>';
-			                    unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
-			                }
-			            ?>
+			            <h3>Categorias</h3>
+			            <a class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModalCat" title="Agregar Categoria"><i class="fa fa-plus"> Agregar Categoria</i></a>
 
 						<div class="modal fade" id="myModalCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                           <div class="modal-dialog" role="document">
@@ -87,6 +87,7 @@
                                     <div class="form-group">
                                         <div class="col-lg-12">
 					                        <input class="form-control" type="text" name="categoria" placeholder="Categoria">
+					                        <input type="text" name="tipo" value="1">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -134,19 +135,25 @@
 								    echo '
 								    <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR EL EDIFICIO -->
 	                                <div class="modal fade" id="myModal'.$row_cat['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	                                  <div class="modal-dialog" role="document">
-	                                    <div class="modal-content">
-	                                      <div class="modal-body">
-	                                        <center>
-	                                            <p class="lead">¿Está seguro que desea eliminar la categoria: <strong>"'.utf8_encode($row_cat['nombre']).'"</strong>?</p>
-	                                        </center>
-	                                      </div>
-	                                      <div class="modal-footer">
-	                                        <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
-	                                        <a class="btn btn-danger" href="#"><i class="fa fa-trash-o"></i> Eliminar</a>
-	                                      </div>
-	                                    </div>
-	                                  </div>
+	                                	<div class="modal-dialog">
+    										<div class="modal-content">
+      											<div class="modal-header">
+        											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        											<h4 class="modal-title">Modal title</h4>
+      											</div>
+      											<div class="modal-body">
+        											<form action="savedcategoria.php" method="post"> 
+		                                        		<center>
+			                                            	<p class="lead">¿Está seguro que desea eliminar la categoria: <strong>"'.utf8_encode($row_cat['nombre']).'"</strong>?</p>
+							                        		<input type="hidden" name="categoria" value="'.$row_cat['id'].'">
+							                        		<input type="hidden" name="tipo" value="3">
+			                                        		<button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+		                                            		<input type="submit" class="btn btn-primary" value="Eliminar" /> 
+			                                        	</center>
+			                                		</form>
+      											</div>
+    										</div>
+  										</div>
 	                                </div>';
 		                        }
 		                        echo "</tbody></table>";

@@ -64,25 +64,65 @@
                 <div class="form-group">
                     <label for="inputNombre" class="col-lg-2 control-label">Nombre</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="nombre" placeholder="Marcos">
+                        <?php
+                            if (!empty($_SESSION['nombre']))
+                            {
+                                echo '<input class="form-control" type="text" name="nombre" placeholder="Marcos" value="'.$_SESSION['nombre'].'">';
+                                unset($_SESSION['nombre']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="nombre" placeholder="Marcos">';
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputApellido" class="col-lg-2 control-label">Apellido</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="apellido" placeholder="Valdivia">
+                        <?php
+                            if (!empty($_SESSION['apellido']))
+                            {
+                                echo '<input class="form-control" type="text" name="apellido" placeholder="Valdivia" value="'.$_SESSION['apellido'].'">';
+                                unset($_SESSION['apellido']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="apellido" placeholder="Valdivia">';
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputUsuario" class="col-lg-2 control-label">Usuario</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="username" placeholder="acebreak">
+                        <?php
+                            if (!empty($_SESSION['username']))
+                            {
+                                echo '<input class="form-control" type="text" name="username" placeholder="acebreak" value="'.$_SESSION['username'].'">';
+                                unset($_SESSION['username']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="username" placeholder="acebreak">';
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="email" placeholder="mi@correo.com.ar">
+                        <?php
+                            if (!empty($_SESSION['email']))
+                            {
+                                echo '<input class="form-control" type="text" name="email" placeholder="mi@correo.com.ar" value="'.$_SESSION['email'].'">';
+                                unset($_SESSION['email']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="email" placeholder="mi@correo.com.ar">';
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -94,7 +134,17 @@
                 <div class="form-group">
                     <label for="inputTelefono" class="col-lg-2 control-label">Telefono</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="telefono" placeholder="2215034511">
+                        <?php
+                            if (!empty($_SESSION['telefono']))
+                            {
+                                echo '<input class="form-control" type="text" name="telefono" placeholder="2215034511" value="'.$_SESSION['telefono'].'">';
+                                unset($_SESSION['telefono']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="telefono" placeholder="2215034511">';
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -102,13 +152,43 @@
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col-xs-3">
-                                <input class="form-control" type="dia" name="dia" placeholder="Día">
+                                <?php
+                                    if (!empty($_SESSION['dia']))
+                                    {
+                                        echo '<input class="form-control" type="dia" name="dia" placeholder="Día" value="'.$_SESSION['dia'].'">';
+                                        unset($_SESSION['dia']); //Elimino la variable de session luego de cargarla
+                                    }
+                                    else
+                                    {
+                                        echo '<input class="form-control" type="dia" name="dia" placeholder="Día">';
+                                    }
+                                ?>
                             </div>
                             <div class="col-xs-3">
-                                <input class="form-control" type="mes" name="mes" placeholder="Mes">
+                                <?php
+                                    if (!empty($_SESSION['mes']))
+                                    {
+                                        echo '<input class="form-control" type="mes" name="mes" placeholder="Mes" value="'.$_SESSION['mes'].'">';
+                                        unset($_SESSION['mes']); //Elimino la variable de session luego de cargarla
+                                    }
+                                    else
+                                    {
+                                        echo '<input class="form-control" type="mes" name="mes" placeholder="Mes">';
+                                    }
+                                ?>
                             </div>
                             <div class="col-xs-6">
-                                <input class="form-control" type="ano" name="ano" placeholder="Año">
+                                <?php
+                                    if (!empty($_SESSION['ano']))
+                                    {
+                                        echo '<input class="form-control" type="ano" name="ano" placeholder="Año" value="'.$_SESSION['ano'].'">';
+                                        unset($_SESSION['ano']); //Elimino la variable de session luego de cargarla
+                                    }
+                                    else
+                                    {
+                                        echo '<input class="form-control" type="ano" name="ano" placeholder="Año">';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -126,7 +206,17 @@
                 <div class="form-group">
                     <label for="inputNroTarjeta" class="col-lg-2 control-label">Nº Tarjeta</label>
                     <div class="col-lg-10">
-                        <input class="form-control" type="text" name="nro_tarjeta" placeholder="1243568790094578">
+                        <?php
+                            if (!empty($_SESSION['nro_tarjeta']))
+                            {
+                                echo '<input class="form-control" type="text" name="nro_tarjeta" placeholder="1243568790094578" value="'.$_SESSION['nro_tarjeta'].'">';
+                                unset($_SESSION['nro_tarjeta']); //Elimino la variable de session luego de cargarla
+                            }
+                            else
+                            {
+                                echo '<input class="form-control" type="text" name="nro_tarjeta" placeholder="1243568790094578">';
+                            }
+                        ?>
                     </div>
                 </div>
 

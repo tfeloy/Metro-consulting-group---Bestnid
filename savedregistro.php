@@ -13,6 +13,16 @@
 	{
 		mysqli_free_result($resEmailExiste);
 		mysqli_close($con);
+
+		$_SESSION['nombre'] = $_POST['nombre'];
+	    $_SESSION['apellido'] = $_POST['apellido'];
+	    $_SESSION['username'] = $_POST['username'];
+	    $_SESSION['telefono'] = $_POST['telefono'];
+		$_SESSION['dia'] = $_POST['dia'];
+		$_SESSION['mes'] = $_POST['mes'];
+		$_SESSION['ano'] = $_POST['ano'];
+		$_SESSION['nro_tarjeta'] = $_POST['nro_tarjeta'];
+
 		$_SESSION['mensaje'] = 'El email ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 		//header("Location: $pathbase/registro.php"); 
@@ -26,6 +36,16 @@
 	{
 		mysqli_free_result($resUsernameExiste);
 		mysqli_close($con);
+
+		$_SESSION['nombre'] = $_POST['nombre'];
+	    $_SESSION['apellido'] = $_POST['apellido'];
+	    $_SESSION['email'] = $_POST['email'];
+	    $_SESSION['telefono'] = $_POST['telefono'];
+		$_SESSION['dia'] = $_POST['dia'];
+		$_SESSION['mes'] = $_POST['mes'];
+		$_SESSION['ano'] = $_POST['ano'];
+		$_SESSION['nro_tarjeta'] = $_POST['nro_tarjeta'];
+
 		$_SESSION['mensaje'] = 'El Usuario ya esta en uso, por favor use otro';
 		echo '<script type="text/javascript"> window.location = "registro.php"</script>';
 		die(); 

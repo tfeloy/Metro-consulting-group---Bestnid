@@ -63,6 +63,8 @@
 						<a href="registroadmin.php" class="btn btn-primary">Agregar Usuario</a>
 						<a href="listarcategorias.php" class="btn btn-primary">Listar Categorias</a>
 						<a href="listarproductos.php" class="btn btn-primary">Listar Productos</a>
+						<a href="listarusuarios.php" class="btn btn-primary">Listar Usuarios</a>
+						<a href="changepass.php" class="btn btn-primary">Cambiar Contraseña</a>
 		            </div>
 		        </div>
 				<?php

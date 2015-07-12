@@ -76,19 +76,21 @@
 				        ?>
 					</div>
 		            <div class="col-md-12">
-			            <h3>Productos</h3>
+			            <h3>Usuarios</h3>
 			            <a href="myaccount.php" class="btn btn-lg btn-primary" title="Volver a mi cuenta"><i class="fa fa-arrow-left"> Volver</i></a>
 
 		                <?php
-		                    $query = 'SELECT p.id, p.titulo, COUNT(o.id_producto) AS Cant FROM productos AS p LEFT JOIN ofertas_realizadas AS o ON p.id = o.id_producto WHERE p.activo = 1 GROUP BY p.id ORDER BY p.titulo ASC';
+		                    $query = 'SELECT id, nombre, apellido, username, es_admin FROM users';
 		                    $result = mysqli_query($con,$query);
+
 		                    if (mysqli_num_rows($result) > 0)                           
 		                    {                               
 		                        echo '<table class="table table-striped table-hover">
 								  <thead>
 								    <tr>
-								      <th>Producto</th>
-								      <th>Ofertas del producto</th>
+								      <th>Usuario</th>
+								      <th>Es Admin</th>
+								      <th>Productos que tiene a la venta</th>
 								      <th>Acciones</th>
 								    </tr>
 								  </thead>
@@ -96,28 +98,35 @@
 
 		                        while ($row_cat = mysqli_fetch_array($result, MYSQLI_ASSOC))                               
 		                        {
-		                            echo '<tr>
-								      <td>'.utf8_encode($row_cat['titulo']).'</td>
-								      <td>'.$row_cat['Cant'].'</td>
-								      <td>';
+		                            $query2 = 'SELECT id_vendedor, COUNT(id) AS Cantidad FROM productos WHERE id_vendedor = '.$row_cat['id'].' GROUP BY id_vendedor';
+		                    		$result2 = mysqli_query($con,$query2);
+									$myrow = mysqli_fetch_array($result2, MYSQLI_ASSOC);
 
-								      if ($row_cat['Cant'] == 0) {
-								      	echo '
-                                    	<a class="btn btn-link" title="Eliminar Producto" data-toggle="modal" data-target="#myModal'.$row_cat['id'].'"><i class="fa fa-trash-o text-danger"></i></a>';
+		                            echo '<tr>
+								      <td>'.utf8_encode($row_cat['apellido']).", ".utf8_encode($row_cat['nombre'])." (".utf8_encode($row_cat['username']).")".'</td>';
+								      if ($row_cat['es_admin'] == 1) {
+								      	echo '<th>Si</th>';
+								      } else {
+								      	echo '<th>No</th>';
+								      }
+								    if ($myrow['Cantidad'] == 0) {
+								    	echo '<td> 0 </td>';
+								    	echo '<td>
+                                    	<a class="btn btn-link" title="Eliminar Usuario" data-toggle="modal" data-target="#myModal'.$row_cat['id'].'"><i class="fa fa-trash-o text-danger"></i></a></td>';
                                     	echo '
-									    <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR LA CATEGORIA -->
+									    <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR EL USUARIO -->
 		                                <div class="modal fade" id="myModal'.$row_cat['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		                                	<div class="modal-dialog">
 	    										<div class="modal-content">
 	      											<div class="modal-header">
 	        											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	        											<h4 class="modal-title">Eiminar la Producto</h4>
+	        											<h4 class="modal-title">Eiminar el Usuario</h4>
 	      											</div>
 	      											<div class="modal-body">
-	        											<form action="savedprod.php" method="post"> 
+	        											<form action="saveduser.php" method="post"> 
 			                                        		<center>
-				                                            	<p class="lead">¿Está seguro que desea eliminar el producto: <strong>"'.utf8_encode($row_cat['titulo']).'"</strong>?</p>
-								                        		<input type="hidden" name="producto" value="'.$row_cat['id'].'">
+				                                            	<p class="lead">¿Está seguro que desea eliminar el producto: <strong>"'.utf8_encode($row_cat['username']).'"</strong>?</p>
+								                        		<input type="hidden" name="id_usuario" value="'.$row_cat['id'].'">
 								                        		<input type="hidden" name="tipo" value="3">
 				                                        		<button type="button" class="btn btn-info" data-dismiss="modal">No</button>
 			                                            		<input type="submit" class="btn btn-primary" value="Eliminar" /> 
@@ -127,13 +136,12 @@
 	    										</div>
 	  										</div>
 		                                </div>';
-								      }
-								      else
-								      {
-								      	echo '
-                                    	<a class="btn btn-link"><i class="fa fa-minus text-danger"></i></a>';
-								      }
 
+								    } else {
+								    	echo '<td>'.$myrow['Cantidad'].'</td>';
+								    	echo '<td><a class="btn btn-link"><i class="fa fa-minus text-danger"></i></a></td>';
+								    }
+		                    		mysqli_free_result($result2);
 								    echo '</tr>';
 		                        }
 		                        echo "</tbody></table>";

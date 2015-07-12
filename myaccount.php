@@ -189,11 +189,30 @@
 																		$editSubasta = 'editsubasta.php?id='.$row['id'];
 																		if ($rowOf['cant'] == 0) 
 																		{
-																			echo '<form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
-																				<input type="hidden" id="id" name="id" value="'.$row['id'].'">
-																				<button type="button" class="button-Icon" data-toggle="modal" data-target="#DeleteConfirm" title="Eliminar"><i class="fa fa-trash"></i></button>
+																			echo '<button type="button" class="button-Icon" data-toggle="modal" data-target="#DeleteConfirm'.$row['id'].'" title="Eliminar"><i class="fa fa-trash"></i></button>
 																				<a href="'.$editSubasta.'" title="Editar Publicación"><i class="fa fa-edit"></i></a>
-																			  </form>';
+																			 <!-- Modal -->
+																			<div class="modal fade" id="DeleteConfirm'.$row['id'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+																			  <div class="modal-dialog" role="document">
+																			    <div class="modal-content">
+																			      <div class="modal-header">
+																			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																			        <h4 class="modal-title" id="myModalLabel">Eliminar Publicación</h4>
+																			      </div>
+																			      <div class="modal-body">
+																			        <p>¿Está seguro que desea eliminar esta publicación?</p>
+																			      </div>
+																			      <div class="modal-footer">
+																			      <form id="delete-form" class="form-horizontal" action="deleteSub.php" method="POST">
+																					<input type="hidden" id="id" name="id" value="'.$row['id'].'">
+																			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+																			        <button type="submit" class="btn btn-primary"><i class="fa fa-trash"></i> Eliminar</button>
+																			      </form>
+																			      </div>
+																			    </div>
+																			  </div>
+																			</div>
+																			<!-- end Modal -->';
 																		}
 																		else
 																		{
@@ -244,28 +263,6 @@
 						  	</div>
 						</div>
 		            </div>
-
-		            <!-- Modal -->
-					<div class="modal fade" id="DeleteConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">Eliminar Publicación</h4>
-					      </div>
-					      <div class="modal-body">
-					        <p>¿Está seguro que desea eliminar esta publicación?</p>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					        <button type="button" class="btn btn-primary" OnClick="document.getElementById('delete-form').submit();"><i class="fa fa-trash"></i> Eliminar</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					<!-- end Modal -->
-
-
 		            <div class="col-lg-4">
 		            	<div class="panel panel-primary">
 							<div class="panel-heading">

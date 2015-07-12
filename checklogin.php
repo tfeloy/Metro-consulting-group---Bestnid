@@ -20,7 +20,7 @@
 		[1]=> NOMBRE
 		[2]=> APELLIDO
 		[3]=> USERNAME
-		[4]=> EMAiL
+		[4]=> EMAIL
 		[5]=> TELEFONO
 		[6]=> FECHA_NACIMIENTO
 		[7]=> SEXO

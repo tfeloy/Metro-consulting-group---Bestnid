@@ -16,6 +16,8 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
+    <script src="assets/js/validate.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -59,7 +61,7 @@
     </div>
     <div class="container">    
         <div class="jumbotron">
-            <form action="checklogin.php" class="form-horizontal" method="post" id="register-form"> 
+            <form action="checklogin.php" class="form-horizontal" method="post"> 
                 <legend>Iniciar Sesión</legend>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email o Username</label>
@@ -73,6 +75,7 @@
                         <input class="form-control" type="password" name="password">
                     </div>
                 </div>
+                
                 
                 <?php
                     if (!empty($_SESSION['checklogin']))
@@ -88,6 +91,19 @@
                         ';
                         unset($_SESSION['checklogin']); //Elimino la variable de session luego de imprimirla
                     }
+                    if (!empty($_SESSION['mensaje']))
+                    {
+                        echo'
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <div class="alert alert-dismissible alert-danger">
+                                    <strong>'.$_SESSION['mensaje'].'</strong>
+                                </div>
+                            </div>
+                        </div>
+                        ';
+                        unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
+                    }
                 ?>
 
                 <div class="form-group">
@@ -96,6 +112,38 @@
                     </div>
                 </div>
             </form>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <a title="Olvide la contraseña" data-toggle="modal" data-target="#myModalPass"><h5>Recuperar Contraseña</h5></a>
+                </div>
+
+                <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR EL USUARIO -->
+                <div class="modal fade" id="myModalPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Recuperar Contraseña</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="recovery.php" method="post" id="recovery-form"> 
+                                    <div>
+                                        <input class="form-control" type="text" name="email" placeholder="Ingrese su email">    
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <center>
+                                            <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                                            <input type="submit" class="btn btn-primary" value="Recuperar" /> 
+                                        </center>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

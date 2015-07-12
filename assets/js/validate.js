@@ -372,3 +372,24 @@ $(document).ready(function(){
     }
   });
 }); // end document.ready
+
+$(document).ready(function(){
+  var count = 4;
+  $('#recovery-form').validate(
+  {
+    rules: {
+      email: {
+        email: true,
+        required: true
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.control-group').removeClass('success').addClass('error');
+    },
+    success: function(element) {
+      element
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
+    }
+  });
+}); // end document.ready

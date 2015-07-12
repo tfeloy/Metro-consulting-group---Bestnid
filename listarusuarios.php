@@ -126,7 +126,7 @@
 	      											<div class="modal-body">
 	        											<form action="saveduser.php" method="post"> 
 			                                        		<center>
-				                                            	<p class="lead">¿Está seguro que desea eliminar el producto: <strong>"'.utf8_encode($row_cat['username']).'"</strong>?</p>
+				                                            	<p class="lead">¿Está seguro que desea eliminar el usuario: <strong>"'.utf8_encode($row_cat['username']).'"</strong>?</p>
 								                        		<input type="hidden" name="id_usuario" value="'.$row_cat['id'].'">
 								                        		<input type="hidden" name="tipo" value="3">
 				                                        		<button type="button" class="btn btn-info" data-dismiss="modal">No</button>

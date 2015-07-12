@@ -54,6 +54,13 @@
         </div>
     </div>
     <div class="container">   
+        
+        <?php
+            $sql = "SELECT count(p.id) AS Cant FROM users AS u LEFT JOIN productos AS p ON u.id = p.id_vendedor WHERE u.id = ".$_SESSION['user'][0];
+            $result = mysqli_query($con,$sql);
+            $myrow = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        ?>
+
 		<div class="row">
             <div class="col-sm-6">
                 <div class="well well-lg">
@@ -63,14 +70,54 @@
                     </center>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="well well-lg">
-                    <center>
-                        <a href="deleteaccount.php" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
-                        <a href="deleteaccount.php"><h2>Eliminar Mi Cuenta</h2></a>
-                    </center>
-                </div>
-            </div>
+            <?php 
+            if ($myrow['Cant'] != 0) {
+                echo '
+                <div class="col-sm-6">
+                    <div class="well well-lg">
+                        <center>                            
+                            <a href="#" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
+                            <h4>Para eliminar su cuenta no debe tener ninguna publicación activa</h4>
+                        </center>
+                    </div>
+                </div>';
+            }
+            else
+            {
+                echo '
+                <div class="col-sm-6">
+                    <div class="well well-lg">
+                        <center>
+                            <a title="Eliminar Usuario" data-toggle="modal" data-target="#myModalDelete" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
+                            <a title="Eliminar Usuario" data-toggle="modal" data-target="#myModalDelete"><h2>Eliminar Mi Cuenta</h2></a>
+                        </center>
+                    </div>
+                </div>'; 
+
+                echo '
+                <!-- MODAL PARA LA CONFIRMACION DE ELIMINAR EL USUARIO -->
+                <div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Eiminar el Usuario</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="deleteaccount.php" method="post"> 
+                                    <center>
+                                        <p class="lead">¿Está seguro que desea su cuenta: <strong>"'.htmlentities($_SESSION['user'][3], ENT_QUOTES, 'UTF-8').'"</strong>?</p>
+                                        <input type="hidden" name="id_usuario" value="'.$_SESSION['user'][0].'">
+                                        <button type="button" class="btn btn-info" data-dismiss="modal">No</button>
+                                        <input type="submit" class="btn btn-primary" value="Eliminar" /> 
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            }
+            ?>
         </div>
     </div>
 </body>

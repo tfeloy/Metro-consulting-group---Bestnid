@@ -11,14 +11,14 @@
 		mysqli_free_result($resPassOK);
 		mysqli_close($con);
 		$_SESSION['mensaje'] = 'La contraseña actual ingresada es incorrecta';
-		echo '<script type="text/javascript"> window.location = "changepass.php"</script>';
+		echo '<script type="text/javascript"> window.location = "ajustes.php"</script>';
         die(); 
 	}
 
 	if (md5($_POST['newpassword']) != md5($_POST['renewpassword']))
 	{
 		$_SESSION['mensaje'] = 'Las contraseñas nuevas ingresada no coinciden';
-		echo '<script type="text/javascript"> window.location = "changepass.php"</script>';
+		echo '<script type="text/javascript"> window.location = "ajustes.php"</script>';
         die(); 
 	}
 

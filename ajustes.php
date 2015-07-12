@@ -2,13 +2,12 @@
     include('conex.php');
     $con = Conectarse();    
     session_start();    
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Bestnid - Iniciar Sesión</title>
+    <title>Bestnid - Mi Cuenta</title>
     <meta name="author" content="https://github.com/tfeloy/Metro-consulting-group---Bestnid/wiki">
     <link rel="shortcut icon" href="assets/img/favicon.ico" />
     <link href="assets/css/main.css" rel="stylesheet">
@@ -32,10 +31,7 @@
                 <?php
                     if(empty($_SESSION['user'])) 
                     {
-                        ?>
-                        <li><a href="registro.php">Registrarse</a></li>
-                        <li><a href="login.php">Iniciar Sesión</a></li>
-                        <?php
+						echo '<script type="text/javascript"> window.location = "login.php"</script>';
                     }
                     else
                     {
@@ -57,45 +53,24 @@
             </ul>
         </div>
     </div>
-    <div class="container">    
-        <div class="jumbotron">
-            <form action="checklogin.php" class="form-horizontal" method="post" id="register-form"> 
-                <legend>Iniciar Sesión</legend>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email o Username</label>
-                    <div class="col-lg-10">
-                        <input class="form-control" type="text" name="email" placeholder="mi@correo.com.ar">
-                    </div>
+    <div class="container">   
+		<div class="row">
+            <div class="col-sm-6">
+                <div class="well well-lg">
+                    <center>
+                        <a href="changepass.php" class="btn btn-link"><i class="fa fa-5x fa-key"></i></a>
+                        <a href="changepass.php"><h2>Cambiar Contraseña</h2></a>
+                    </center>
                 </div>
-                <div class="form-group">
-                    <label for="inputContraseña" class="col-lg-2 control-label">Contraseña</label>
-                    <div class="col-lg-10">
-                        <input class="form-control" type="password" name="password">
-                    </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="well well-lg">
+                    <center>
+                        <a href="deleteaccount.php" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
+                        <a href="deleteaccount.php"><h2>Eliminar Mi Cuenta</h2></a>
+                    </center>
                 </div>
-                
-                <?php
-                    if (!empty($_SESSION['checklogin']))
-                    {
-                        echo'
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <div class="alert alert-dismissible alert-danger">
-                                    <strong>'.$_SESSION['checklogin'].'</strong>
-                                </div>
-                            </div>
-                        </div>
-                        ';
-                        unset($_SESSION['checklogin']); //Elimino la variable de session luego de imprimirla
-                    }
-                ?>
-
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <input type="submit" class="btn btn-success" value="Iniciar Sesión" /> 
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </body>

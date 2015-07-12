@@ -40,7 +40,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo htmlentities($_SESSION['user'][3], ENT_QUOTES, 'UTF-8') ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="myaccount.php"><i class="fa fa-child"></i> Mi Cuenta</a></li>
-                                <li><a href="changepass.php"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
+                                <li><a href="ajustes.php"><i class="fa fa-cogs"></i> Ajustes</a></li>
                                 <li class="divider"></li>
                                 <li><a href="logout.php"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
                             </ul>
@@ -65,7 +65,6 @@
 						<a href="listarcategorias.php" class="btn btn-primary">Listar Categorias</a>
 						<a href="listarproductos.php" class="btn btn-primary">Listar Productos</a>
 						<a href="listarusuarios.php" class="btn btn-primary">Listar Usuarios</a>
-						<a href="changepass.php" class="btn btn-primary">Cambiar Contraseña</a>
 		            </div>
 		        </div>
 				<?php

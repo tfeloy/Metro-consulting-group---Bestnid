@@ -119,6 +119,16 @@
             }
             ?>
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well well-lg">
+                    <center>
+                        <a href="editPerfil.php" class="btn btn-link"><i class="fa fa-5x fa-user"></i></a>
+                        <a href="editPerfil.php"><h2>Editar Perfil</h2></a>
+                    </center>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

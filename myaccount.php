@@ -154,7 +154,7 @@
 	                                        				<div class="row">
 	                                        					<div class="col-sm-12">';
 
-	                                        					if($row['activo'] == 0)
+	                                        					if($row['activo'] == 0 and $row['vendido'] == 0)
 	                                        					{
 	                                        						echo '<div class="bg-danger">
 	                                        								<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
@@ -164,12 +164,16 @@
 	                                        					{
 	                                        						if($row['vendido'] == 1)
 	                                        						{
+	                                        							$seleccionarwinner = 'winner.php?id='.$row['id'];
 	                                        							echo '<div class="bg-success">
 	                                        									<h4 class="list-group-item-heading">'.utf8_encode($row['titulo']).'</h4>
 	                                        									<p class="text-success">Precio venta: <em>$'.$row['precio'].'</em></p>
-	                                        									<p class="text-success">Comision: <em>$'.(string)(((real)($row['precio'])*(real)($row['comision'])/100)).'</em></p>
+	                                        									<p class="text-success">Comision: <em>$'.$row['comision'].'</em></p>
 	                                        									<p class="text-success">Ganador: <em>'.utf8_encode($rowGanador['username']).'</em></p>
 	                                        									<p class="text-success text-right"><em>VENDIDO</em></p>
+				                                            				</div>
+				                                            				<div class="col-xs-1 col-lg-offset-11">
+				                                            					<a href="'.$seleccionarwinner.'" title="Elegir Ganador"><i class="fa fa-eye"></i></a>
 				                                            				</div>';
 	                                        						}
 	                                        						else

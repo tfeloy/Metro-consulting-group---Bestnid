@@ -63,6 +63,61 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   var count = 4;
+  $('#editPerfil-form').validate(
+  {
+    rules: {
+      nombre: {
+        minlength: 3,
+        required: true
+      },
+      apellido: {
+        minlength: 3,
+        required: true
+      },
+      email: {
+        email: true,
+        required: true
+      },
+      telefono: {
+        digits: true,
+        minlength: 3,
+        required: true
+      },
+      dia: {
+        range: [1, 31],
+        digits: true,
+        required: true
+      },
+      mes: {
+        range: [1, 12],
+        digits: true,
+        required: true
+      },
+      ano: {
+        range: [1910, 2015],
+        digits: true,
+        required: true
+      },
+     nro_tarjeta: {
+        digits: true,
+        minlength: 16,
+        maxlength: 16,
+        required: true
+      }
+    },
+    highlight: function(element) {
+      $(element).closest('.control-group').removeClass('success').addClass('error');
+    },
+    success: function(element) {
+      element
+      .text('OK!').addClass('valid')
+      .closest('.control-group').removeClass('error').addClass('success');
+    }
+  });
+}); // end document.ready
+
+$(document).ready(function(){
+  var count = 4;
   $('#registeradmin-form').validate(
   {
     rules: {

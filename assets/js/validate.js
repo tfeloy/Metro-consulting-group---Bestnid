@@ -368,8 +368,7 @@ $(document).ready(function(){
 }); // end document.ready
 
 $(document).ready(function(){
-    var count = 4;
-  $('#responderConsulta-form').validate(
+  $('#respuesta-form').validate(
   {
     rules: {
       respuesta: {

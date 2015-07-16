@@ -160,12 +160,27 @@
 														else
 														{
 															?>
-																<form action="savedrespuesta.php" class="form-horizontal" method="post" id="responderConsulta-form">
+																<form action="savedrespuesta.php" class="form-horizontal" method="post" id="respuesta-form">
 																	<div class="form-group">	
 																		<div class="col-lg-10 col-lg-offset-1">
-			                                                        		<input type="text" id="respuesta" name="respuesta" placeholder="Responda la consulta" class="respuesta form-control">
+			                                                        		<input class="form-control" type="text" name="respuesta" placeholder="Responda la consulta" value="">
 			                                                    		</div>
 				                                                	</div>
+				                                                	<?php
+										                                if (!empty($_SESSION['mensaje']))
+										                                {
+										                                    echo'
+										                                    <div class="form-group">
+										                                        <div class="col-lg-10 col-lg-offset-2">
+										                                            <div class="alert alert-dismissible alert-danger">
+										                                                <strong>'.$_SESSION['mensaje'].'</strong>
+										                                            </div>
+										                                        </div>
+										                                    </div>
+										                                    ';
+										                                    unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
+										                                }
+                          										  	?>
 										                            <input type="hidden" name="id_producto" value="<?php echo $idProducto; ?>">
 		                                                			<input type="hidden" name="id_consulta" value="<?php echo $row['id']; ?>">
 		                                                			<input type="hidden" name="id_vendedor" value="<?php echo $_SESSION['user'][0]; ?>">

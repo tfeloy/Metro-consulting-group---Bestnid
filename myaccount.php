@@ -65,6 +65,7 @@
 						<a href="listarcategorias.php" class="btn btn-primary">Listar Categorias</a>
 						<a href="listarproductos.php" class="btn btn-primary">Listar Productos</a>
 						<a href="listarusuarios.php" class="btn btn-primary">Listar Usuarios</a>
+						<a href="verEstadisticas.php" class="btn btn-primary">Ver Estadisticas</a>
 		            </div>
 		        </div>
 				<?php

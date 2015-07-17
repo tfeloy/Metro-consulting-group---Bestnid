@@ -15,6 +15,7 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     <script src="assets/js/jquery-1.7.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.validate.js"></script>
     <script src="assets/js/validate.js"></script>
 </head>
 <body>

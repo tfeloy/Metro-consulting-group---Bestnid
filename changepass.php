@@ -28,28 +28,17 @@
             <a class="navbar-brand" href="index.php">Bestnid</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse"> 
-            <ul class="nav navbar-nav navbar-right">
-                <?php
-                    if($_SESSION['user'][9] == 0)
-                    {
-                        echo '<script type="text/javascript"> window.location = "index.php"</script>';
-                    }
-                    else
-                    {
-                        ?>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo htmlentities($_SESSION['user'][3], ENT_QUOTES, 'UTF-8') ?> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="myaccount.php"><i class="fa fa-child"></i> Mi Cuenta</a></li>
-                                <li><a href="ajustes.php"><i class="fa fa-cogs"></i> Ajustes</a></li>
-                                <li class="divider"></li>
-                                <li><a href="logout.php"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="subastar.php">Subastar</a></li>
-                        <?php
-                    }
-                ?>
+            <ul class="nav navbar-nav navbar-right">                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo htmlentities($_SESSION['user'][3], ENT_QUOTES, 'UTF-8') ?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="myaccount.php"><i class="fa fa-child"></i> Mi Cuenta</a></li>
+                        <li><a href="ajustes.php"><i class="fa fa-cogs"></i> Ajustes</a></li>
+                        <li class="divider"></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out"></i> Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li><a href="subastar.php">Subastar</a></li>
                 <li><a href="ayuda.php"><i class="fa fa-life-ring"></i></a></li>
             </ul>
         </div>

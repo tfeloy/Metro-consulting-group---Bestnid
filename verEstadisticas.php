@@ -73,6 +73,7 @@
         </div>
         <?php
         //USUARIOS REGISTRADOS
+        /*
             $sql = 'SELECT COUNT(*) AS totUsers FROM users WHERE fecha_registro >= "1910-01-01" AND fecha_registro <= curdate()';
             $result = mysqli_query($con,$sql);
             if (mysqli_num_rows($result) > 0)                           
@@ -99,6 +100,7 @@
                 $PublicacionesVendidas = $row['totPublicaciones'];
                 mysqli_free_result($result);
             }
+        */
         //---------------------------------
 
              if (isset($_POST['fechaDesde']))
@@ -122,12 +124,12 @@
                 }
                 else
                 {
-                    $endDate = 'curdate()';
+                    $endDate = '2030-02-02';
                 }
             }
             else
             {
-                $endDate = 'curdate()';
+                $endDate = '2030-02-02';
             }
             
         
@@ -135,7 +137,7 @@
                 $sql = 'SELECT COUNT(*) AS cantUsers FROM users WHERE fecha_registro >="'.$initDate.'" AND fecha_registro <='.$endDate;
                 $result = mysqli_query($con,$sql);
 
-                if ($endDate == 'curdate()') {
+                if ($endDate == '2030-02-02') {
                     $endDate = (string)(date('d').'-'.date('m').'-'.date('Y'));
                 }
                 else
@@ -163,11 +165,11 @@
                                     echo '<legend>Cantidad de Usuarios Registrados</legend>
                                           <div class="col-sm-10 col-sm-offset-1">
                                             <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Usuarios Registrados: '.$rowUsers['cantUsers'].'</p>
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total de Usuarios Registrados: '.$UserTotal.'</p>
                                             </br></br>
                                           </div>';
                             
                                 }
+                                /*
                                 else
                                 {
                                     echo '<legend>Cantidad de Usuarios Registrados </legend>
@@ -176,6 +178,7 @@
                                             </br></br>
                                           </div>';
                                 }
+                                */
                                 mysqli_free_result($result);
 
                                 //PUBLICACIONES ACTIVAS
@@ -187,11 +190,11 @@
                                     echo '<legend>Cantidad de Publicaciones Realizadas</legend>
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Publicaciones Realizadas: '.$row['totPublicaciones'].'</p>
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total de Publicaciones Realizadas: '.$PublicacionesActivas.'</p>
                                             </br></br>
                                           </div>';
                             
                                 }
+                                /*
                                 else
                                 {
                                     echo '<legend>Cantidad de Publicaciones Realizadas </legend>
@@ -200,6 +203,7 @@
                                             </br></br>
                                           </div>';
                                 }
+                                */
                                 mysqli_free_result($result);
 
                                 //PUBLICACIONES VENDIDAS
@@ -212,10 +216,10 @@
                                     echo '<legend>Cantidad de Productos Vendidos</legend>
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Productos Vendidos: '.$row['totPub'].'</p>
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total Productos Vendidos: '.$PublicacionesVendidas.'</p>
                                             </br></br>
                                           </div>';
                                 }
+                                /*
                                 else
                                 {
                                     echo '<legend>Cantidad de Publicaciones Activas </legend>
@@ -224,6 +228,7 @@
                                             </br></br>
                                           </div>';
                                 }
+                                */
                                 mysqli_free_result($result);
 
                             ?>

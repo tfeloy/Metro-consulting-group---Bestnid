@@ -101,6 +101,7 @@
                                 <tr>
                                     <th>Producto</th>
                                     <th>Necesidades</th>
+                                    <th>Ganador</th>
                                     <th>Gano</th>
                                 </tr>
                             </thead>
@@ -108,19 +109,24 @@
 
                         while ($row = mysqli_fetch_array($resOf, MYSQLI_ASSOC))                               
                         {
+                            $query2 = 'SELECT * FROM users WHERE id = '.$row['id_usuario'];
+                            $resultUser = mysqli_query($con,$query2);
+                            $rowUser = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
+
                             echo '
                             <tr>
                                 <td>'.utf8_encode($row['titulo']).'</td>
-                                <td>'.utf8_encode($row['necesidad_ofertada']).'</td>
-                                <td>';
+                                <td>'.utf8_encode($row['necesidad_ofertada']).'</td>';
                                 if ($row['es_ganador'] == 1) {
-                                    echo '<i class="fa fa-check text-success"></i> $'.$row['precio_ofertado'];
+                                    echo '<td>'.$rowUser['username'].' (<a href="mailto:'.$rowUser['email'].'?Subject=Gano%20la%20oferta%20en%20Bestnid" target="_top">'.$rowUser['email'].'</a>)</td>';
+                                    echo '<td><i class="fa fa-check text-success"></i> $'.$row['precio_ofertado'].'</td>';
                                 }
                                 else
                                 {
-                                    echo '<i class="fa fa-times text-danger"></i>';
+                                    echo '<td><i class="fa fa-minus text-danger"></i></td>';
+                                    echo '<td><i class="fa fa-times text-danger"></i></td>';
                                 }
-                                echo '</td>
+                                echo '
                             </tr>';
 
                         }

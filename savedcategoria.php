@@ -7,6 +7,21 @@
     switch ($_POST['tipo']) {
         case 1:
             # AGREGAR
+            
+
+            /* Consulto si ya esta en uso el corre electronico */
+            $sqlCategoriaExiste = 'SELECT 1 FROM categorias WHERE nombre = "'.$_POST['categoria'].'" LIMIT 1';
+            $resCategoriaExiste = mysqli_query($con,$sqlCategoriaExiste);
+            if (mysqli_fetch_row($resCategoriaExiste)) 
+            {
+                mysqli_free_result($resCategoriaExiste);
+                mysqli_close($con);
+
+                $_SESSION['mensaje'] = 'La categoria ya esta en uso, por favor use otro';
+                echo '<script type="text/javascript"> window.location = "listarcategorias.php"</script>';
+                die(); 
+            }
+
             /* Guardo luego de pasar todas las validaciones */
             $sql = 'INSERT INTO categorias (nombre) ';
             $sql .= 'VALUES("'.$_POST['categoria'].'")';

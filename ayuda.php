@@ -57,7 +57,33 @@
     <div class="container">    
         <div class="row">
             <div class="col-lg-12">
-                <a href="#"><img alt="" class="img-responsive" src="assets/img/construccion.jpg"></a>
+                <h1>PREGUNTAS FRECUENTES </h1>
+
+                <blockquote>
+                  <p>Bestnid es considerado un remate, pero un tanto particular. En Bestnid el bien subastado no se adjudica al postor que más dinero haya ofrecido por él, sino que cada postor comunica por qué necesita dicho producto, y el subastador elegirá un ganador.</p>
+                  <small>¿Cómo funciona Bestnid?</small>
+                </blockquote>
+
+                <blockquote>
+                  <p>Si no recuerda su nombre de usuario, puede iniciar sesión con el mail que proporcionó a Bestnid al registrarse. También puede, desde la ventana de inicio de sesión, solicitar la recuperación de su contraseña simplemente ingresando su dirección de e-mail y le enviaremos un correo con la nueva contraseña. </p>
+                  <small>¿Cómo recuperar mi usuario o contraseña?</small>
+                </blockquote>
+
+                <blockquote>
+                  <p>Arriba a la derecha, haciendo click en tu nombre, se desplegará un menú. Selecciona “ajustes” y luego “Cambiar contraseña”.</p>
+                  <small>¿Cómo cambiar mi contraseña?</small>
+                </blockquote>
+
+
+                <blockquote>
+                  <p>Primero debes haber iniciado sesión. Selecciona el producto por el que desees ofertar, y presiona “Ofertar”, luego expresa porqué te consideras merecedor del producto y haz tu oferta. </p>
+                  <small>¿Cómo ofertar por un producto?</small>
+                </blockquote>
+
+                <blockquote>
+                  <p>Si. Siempre que no tenga ofertas activas, puedes modificarla. Para ello sólo debes ir a “Mi cuenta”,”Mis publicaciones”, “Editar Publicación”.</p>
+                  <small>¿Se puede modificar una publicación mía?</small>
+                </blockquote>
             </div>
             <div class="col-lg-12">
                 <center>

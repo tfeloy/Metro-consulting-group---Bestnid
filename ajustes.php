@@ -62,7 +62,7 @@
         ?>
 
 		<div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="well well-lg">
                     <center>
                         <a href="changepass.php" class="btn btn-link"><i class="fa fa-5x fa-key"></i></a>
@@ -73,7 +73,7 @@
             <?php 
             if ($myrow['Cant'] != 0) {
                 echo '
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="well well-lg">
                         <center>                            
                             <a href="#" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
@@ -85,7 +85,7 @@
             else
             {
                 echo '
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="well well-lg">
                         <center>
                             <a title="Eliminar Usuario" data-toggle="modal" data-target="#myModalDelete" class="btn btn-link"><i class="fa fa-5x fa-trash-o"></i></a>
@@ -118,9 +118,7 @@
                 </div>';
             }
             ?>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="well well-lg">
                     <center>
                         <a href="editPerfil.php" class="btn btn-link"><i class="fa fa-5x fa-user"></i></a>

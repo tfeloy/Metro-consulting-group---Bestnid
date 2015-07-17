@@ -136,7 +136,8 @@
                     $mail->Body = $cuerpo;
 
                     /* 
-                    // Lo dejo comentado asi no manda muchos mails                    
+                    // Lo dejo comentado asi no manda muchos mails    
+                    // UPDATE ofertas_realizadas SET es_ganador = 0 WHERE es_ganador = 1                
 
                     if(!$mail->Send())
                     {
@@ -145,18 +146,18 @@
 
                         $_SESSION['mensaje'] = $mail->ErrorInfo;
                         echo '<script type="text/javascript"> window.location = "success.php"</script>';
-                    die(); 
+                        die(); 
                     }
                     else
                     {
                         $_SESSION['mensaje'] = $cuerpo;
-                        echo '<script type="text/javascript"> window.location = "success.php"</script>';
+                        echo '<script type="text/javascript"> window.location = "winner.php?id='.$_GET['id_producto'].'"</script>';
                         die(); 
                     }
                     */
 
                     $_SESSION['mensaje'] = $cuerpo;
-                    echo '<script type="text/javascript"> window.location = "success.php"</script>';
+                    echo '<script type="text/javascript"> window.location = "winner.php?id='.$_GET['id_producto'].'"</script>';
 
                 }                
             ?>

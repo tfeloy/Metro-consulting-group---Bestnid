@@ -55,7 +55,19 @@
     </div>
     <div class="container">   
         <div class="col-lg-12">
-            <?php       
+            <?php
+                if (!empty($_SESSION['mensaje']))
+                {
+                    echo'<div class="col-lg-12">
+                            <div class="alert alert-dismissible alert-success">
+                            <center>
+                                <strong>'.$_SESSION['mensaje'].'</strong>
+                            </center>
+                            </div>
+                        </div>';
+                    unset($_SESSION['mensaje']); //Elimino la variable de session luego de imprimirla
+                }
+            
                 // UPDATE ofertas_realizadas set es_ganador = 1 WHERE id_usuario = 9 AND id_producto = 15          
                 $queryOf = 'SELECT p.titulo, p.descripcion, o.* FROM productos p INNER JOIN ofertas_realizadas o ON p.id=o.id_producto WHERE p.id = '.$_GET['id'].' AND o.activo = 1 AND DATE(p.fecha_fin) < DATE(NOW())';
                 $resOf = mysqli_query($con,$queryOf);

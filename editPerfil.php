@@ -75,13 +75,13 @@
                         <div class="form-group">
                             <label for="inputNombre" class="col-lg-2 control-label">Nombre</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" name="nombre" placeholder="<?php echo $row['nombre']; ?>" value="<?php echo $row['nombre']; ?>">
+                                <input class="form-control" type="text" name="nombre" placeholder="<?php echo utf8_encode($row['nombre']); ?>" value="<?php echo utf8_encode($row['nombre']); ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputApellido" class="col-lg-2 control-label">Apellido</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" name="apellido" placeholder="<?php echo $row['apellido']; ?>" value="<?php echo $row['apellido']; ?>">
+                                <input class="form-control" type="text" name="apellido" placeholder="<?php echo utf8_encode($row['apellido']); ?>" value="<?php echo utf8_encode($row['apellido']); ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -110,6 +110,16 @@
                                         <input class="form-control" type="text" name="ano" placeholder="año" value="<?php echo $row['ano']; ?>">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSexo" class="col-lg-2 control-label">Sexo</label>
+                            <div class="col-lg-10">
+                                <select name="sexo" class="sexo form-control" id="sexo">
+                                    <option value="">Sexo</option>
+                                    <option value="0">Mujer</option>
+                                    <option value="1">Hombre</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,9 +160,36 @@
             }
             else
             {
+                $sql = 'SELECT email FROM users WHERE id ='.$_SESSION['user'][0];
+                $result2 = mysqli_query($con,$sql);
+                if (mysqli_num_rows($result2) > 0)                           
+                {
+                    $row = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+                    if($row['email'] == $_POST['email'])
+                    {
+                        $mismo = 1;
+                    }
+                    else
+                    {
+                        $mismo = 0;
+                    }
+                }
+                mysqli_free_result($result2);
+
                 /* ARMO EL UPDATE */
+                $sql = 'SELECT * FROM users WHERE email ="'.$_POST['email'].'"';
+                $result = mysqli_query($con,$sql);
+                if ((mysqli_num_rows($result) > 0) AND ($mismo == 0))
+                {
+                    $_SESSION['mensaje'] = "El email ya está en uso!";
+                        mysqli_free_result($resultUpdate);
+                        mysqli_close($con);
+                        echo '<script type="text/javascript"> window.location = "editPerfil.php"</script>';
+                }
+                else
+                {
                     $fecha_nacimiento = $_POST['ano'].'-'.$_POST['mes'].'-'.$_POST['dia'];
-                    $sqlUpdate = 'UPDATE users SET nombre="'.$_POST['nombre'].'", apellido="'.$_POST['apellido'].'",email="'.$_POST['email'].'",telefono="'.$_POST['telefono'].'",fecha_nac="'.$fecha_nacimiento.'",nro_tarjeta="'.$_POST['nro_tarjeta'].'" WHERE id="'.$_SESSION['user'][0].'"';
+                    $sqlUpdate = 'UPDATE users SET nombre="'.$_POST['nombre'].'", apellido="'.$_POST['apellido'].'",email="'.$_POST['email'].'",telefono="'.$_POST['telefono'].'",fecha_nac="'.$fecha_nacimiento.'",sexo="'.$_POST['sexo'].'",nro_tarjeta="'.$_POST['nro_tarjeta'].'" WHERE id="'.$_SESSION['user'][0].'"';
                     $resultUpdate = mysqli_query($con,$sqlUpdate);
 
                     if(!$resultUpdate)
@@ -166,7 +203,8 @@
                     $_SESSION['mensaje'] = 'El perfil se modifico exitosamente';
                     echo '<script type="text/javascript"> window.location = "success.php"</script>';
                 
-
+                }
+                mysqli_free_result($result);
             }
         ?>
     </div>

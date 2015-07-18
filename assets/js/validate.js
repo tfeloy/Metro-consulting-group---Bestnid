@@ -98,6 +98,9 @@ $(document).ready(function(){
         digits: true,
         required: true
       },
+      sexo: {
+        required: true
+      },
      nro_tarjeta: {
         digits: true,
         minlength: 16,

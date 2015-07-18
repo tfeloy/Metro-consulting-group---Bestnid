@@ -155,9 +155,10 @@
                         die(); 
                     }
                     */
-
                     $_SESSION['mensaje'] = $cuerpo;
                     echo '<script type="text/javascript"> window.location = "winner.php?id='.$_GET['id_producto'].'"</script>';
+                    
+
 
                 }                
             ?>

@@ -60,7 +60,7 @@
         {
         ?>
         <div class="jumbotron col-lg-10 col-lg-offset-1">
-            <form action="verEstadisticas2.php" class="form-horizontal form-inline" method="post" id="estFechas-form">
+            <form action="verEstadisticas.php" class="form-horizontal form-inline" method="post" id="estFechas-form">
                 <legend>Elegir Fechas</legend>    
                 <div class="form-group col-lg-5">
                     <label for="fechaDesde" class="control-label">Fecha Desde</label>
@@ -101,7 +101,7 @@
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                     echo '<div class="col-lg-12">
-                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="estUsers-form">';
+                            <form action="verEstadisticas.php" method="post" class="form-horizontal" id="estUsers-form">';
                     if(isset($_POST['fechaDesde']))
                     {
                         echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';
@@ -146,7 +146,7 @@
                 {
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     echo '<div class="col-lg-12">
-                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="prodPublicados-form">';
+                            <form action="verEstadisticas.php" method="post" class="form-horizontal" id="prodPublicados-form">';
                     if(isset($_POST['fechaDesde']))
                     {
                         echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';
@@ -191,7 +191,7 @@
                 {
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                      echo '<div class="col-lg-12">
-                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="prodVendidos-form">';
+                            <form action="verEstadisticas.php" method="post" class="form-horizontal" id="prodVendidos-form">';
                     if(isset($_POST['fechaDesde']))
                     {
                         echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';

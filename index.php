@@ -84,7 +84,7 @@
             <div class="col-md-4">
                 <h3>Categorias</h3>
                 <?php
-                    $query = 'SELECT id, nombre FROM categorias';
+                    $query = 'SELECT id, nombre FROM categorias ORDER BY nombre';
                     $result = mysqli_query($con,$query);
                     if (mysqli_num_rows($result) > 0)                           
                     {                               

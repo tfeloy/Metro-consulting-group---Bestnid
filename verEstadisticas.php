@@ -54,195 +54,348 @@
         </div>
     </div>
     <div class="container">
+        <?php
+        // Si es 1 es ADMIN sino si es 0 USER NORMAL
+        if($_SESSION['user'][9] == 1)
+        {
+        ?>
         <div class="jumbotron col-lg-10 col-lg-offset-1">
-            <form action="verEstadisticas.php" class="form-horizontal form-inline" method="post" id="editPerfil-form">
+            <form action="verEstadisticas2.php" class="form-horizontal form-inline" method="post" id="estFechas-form">
                 <legend>Elegir Fechas</legend>    
                 <div class="form-group col-lg-5">
                     <label for="fechaDesde" class="control-label">Fecha Desde</label>
                     <input class="form-control" type="date" name="fechaDesde" placeholder="Fecha Desde..." value="<?php if(isset($_POST['fechaDesde'])){ echo $_POST['fechaDesde'];} ?>">
                 </div>
                 <div class="form-group col-lg-5 col-lg-offset-6">
-                    <label for="fechaHasta" class="control-label">Fecha Desde</label>
+                    <label for="fechaHasta" class="control-label">Fecha Hasta</label>
                     <input class="form-control" type="date" name="fechaHasta" placeholder="Fecha Hasta..." value="<?php if(isset($_POST['fechaHasta'])){ echo $_POST['fechaHasta'];} ?>">
                 </div>
                 <div class="form-group col-lg-2 col-lg-offset-8">
                     <input type="submit" class="btn btn-success" value="Ver Estadisticas" /> 
                 </div>
             </form>
-
         </div>
-        <?php
-        //USUARIOS REGISTRADOS
-        /*
-            $sql = 'SELECT COUNT(*) AS totUsers FROM users WHERE fecha_registro >= "1910-01-01" AND fecha_registro <= curdate()';
-            $result = mysqli_query($con,$sql);
-            if (mysqli_num_rows($result) > 0)                           
-            {
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                $UserTotal = $row['totUsers'];
-                mysqli_free_result($result);
-            }
-        //PUBLICACIONES ACTIVAS
-            $sql = 'SELECT COUNT(*) AS totPublicaciones FROM productos WHERE fecha_publicacion >= "1910-01-01"';
-            $result = mysqli_query($con,$sql);
-            if (mysqli_num_rows($result) > 0)                           
-            {
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                $PublicacionesActivas = $row['totPublicaciones'];
-                mysqli_free_result($result);
-            }
-        //PUBLICACIONES VENDIDAS
-            $sql = 'SELECT COUNT(*) AS totPublicaciones FROM productos WHERE fecha_publicacion >= "1910-01-01" AND fecha_fin <= curdate() AND vendido = 1';
-            $result = mysqli_query($con,$sql);
-            if (mysqli_num_rows($result) > 0)                           
-            {
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                $PublicacionesVendidas = $row['totPublicaciones'];
-                mysqli_free_result($result);
-            }
-        */
-        //---------------------------------
-
-             if (isset($_POST['fechaDesde']))
-            {
-                if ($_POST['fechaDesde'] != '') {
-                    $initDate = $_POST['fechaDesde'];    
-                }
-                else
+        <div class="row">
+            <div class="col-lg-4">
+             
+            <?php
+                //Usuarios registrados
+                $sql = 'SELECT COUNT(*) AS cantUsers FROM users WHERE 1=1';
+                if(isset($_POST['fechaDesde']))
                 {
-                    $initDate = '1910-01-01';
-                }                
-            }
-            else
-            {
-                $initDate = '1910-01-01';
-            }
-            if(isset($_POST['fechaHasta']))
-            {
-                if ($_POST['fechaHasta'] != '') {
-                    $endDate = '"'.$_POST['fechaHasta'].'"';
+                    if($_POST['fechaDesde'] != '')
+                    {
+                        $sql .= ' AND fecha_registro >= "'.$_POST['fechaDesde'].'"';
+                    }
                 }
-                else
+                 if(isset($_POST['fechaHasta']))
                 {
-                    $endDate = '2030-02-02';
+                    if($_POST['fechaHasta'] != '')
+                    {
+                        $sql .= ' AND fecha_registro <= "'.$_POST['fechaHasta'].'"';
+                    }
                 }
-            }
-            else
-            {
-                $endDate = '2030-02-02';
-            }
-            
-        
-                //USUARIOS REGISTRADOS
-                $sql = 'SELECT COUNT(*) AS cantUsers FROM users WHERE fecha_registro >="'.$initDate.'" AND fecha_registro <='.$endDate;
                 $result = mysqli_query($con,$sql);
-
-                if ($endDate == '2030-02-02') {
-                    $endDate = (string)(date('d').'-'.date('m').'-'.date('Y'));
-                }
-                else
+                if (mysqli_num_rows($result) > 0)                           
                 {
-                    $endDate = str_replace('"','',$endDate);
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+                    echo '<div class="col-lg-12">
+                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="estUsers-form">';
+                    if(isset($_POST['fechaDesde']))
+                    {
+                        echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';
+                    }
+                    if(isset($_POST['fechaHasta']))
+                    {
+                        echo '<input type="hidden" name="fechaHasta" value="'.$_POST['fechaHasta'].'">';
+                    }
+                    echo '<input type="hidden" name="usuarios" value="1">
+                        <button class="btn btn-primary col-lg-10" type="submit" name="usuarios"';
+                        if($row['cantUsers'] == 0)
+                        {
+                            echo 'disabled="disabled"';
+                        }
+                        echo '>
+                            Usuarios Registrados <span class="badge">'.$row['cantUsers'].'</span>
+                        </button></form></div>';
                 }
+                mysqli_free_result($result);
+                ?>
+            </div>
+            <div class="col-lg-4">
+                <?php
+                //Productos Publicados
+                $sql = 'SELECT COUNT(*) AS cantPublic FROM productos WHERE 1=1';
+                if(isset($_POST['fechaDesde']))
+                {
+                    if($_POST['fechaDesde'] != '')
+                    {
+                        $sql .= ' AND fecha_publicacion >= "'.$_POST['fechaDesde'].'"';
+                    }
+                }
+                 if(isset($_POST['fechaHasta']))
+                {
+                    if($_POST['fechaHasta'] != '')
+                    {
+                        $sql .= ' AND fecha_publicacion <= "'.$_POST['fechaHasta'].'"';
+                    }
+                }
+                $result = mysqli_query($con,$sql);
+                if (mysqli_num_rows($result) > 0)                           
+                {
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    echo '<div class="col-lg-12">
+                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="prodPublicados-form">';
+                    if(isset($_POST['fechaDesde']))
+                    {
+                        echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';
+                    }
+                    if(isset($_POST['fechaHasta']))
+                    {
+                        echo '<input type="hidden" name="fechaHasta" value="'.$_POST['fechaHasta'].'">';
+                    }
+                    echo '<input type="hidden" name="publicados" value="1">
+                        <button class="btn btn-primary col-lg-10" type="submit" name="publicados"';
+                        if($row['cantPublic'] == 0)
+                        {
+                            echo 'disabled="disabled"';
+                        }
+                        echo '>
+                            Productos Publicados <span class="badge">'.$row['cantPublic'].'</span>
+                        </button></form></div>';
+                }
+                mysqli_free_result($result);
             ?>
-                         
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart"></i> Estadísticas <?php echo ' (Del '.$initDate.' al '.$endDate.')'; ?></h3>
-                            </div>
-                            <div class="panel-body">   
+            </div>
+            <div class="col-lg-4">
+                <?php
+                //Productos Vendidos
+                $sql = 'SELECT COUNT(*) AS cantVendidos FROM productos WHERE vendido = 1';
+                if(isset($_POST['fechaDesde']))
+                {
+                    if($_POST['fechaDesde'] != '')
+                    {
+                        $sql .= ' AND fecha_fin >= "'.$_POST['fechaDesde'].'"';
+                    }
+                }
+                 if(isset($_POST['fechaHasta']))
+                {
+                    if($_POST['fechaHasta'] != '')
+                    {
+                        $sql .= ' AND fecha_fin <= "'.$_POST['fechaHasta'].'"';
+                    }
+                }
+                $result = mysqli_query($con,$sql);
+                if (mysqli_num_rows($result) > 0)                           
+                {
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                     echo '<div class="col-lg-12">
+                            <form action="verEstadisticas2.php" method="post" class="form-horizontal" id="prodVendidos-form">';
+                    if(isset($_POST['fechaDesde']))
+                    {
+                        echo '<input type="hidden" name="fechaDesde" value="'.$_POST['fechaDesde'].'">';
+                    }
+                    if(isset($_POST['fechaHasta']))
+                    {
+                        echo '<input type="hidden" name="fechaHasta" value="'.$_POST['fechaHasta'].'">';
+                    }
+                    echo '<input type="hidden" name="vendidos" value="1">
+                        <button class="btn btn-primary col-lg-10" type="submit" name="vendidos"';
+                    if($row['cantVendidos'] == 0)
+                    {
+                        echo 'disabled="disabled"';
+                    }
+                    echo '>
+                            Productos Vendidos <span class="badge">'.$row['cantVendidos'].'</span>
+                        </button></form></div>';
+                }
+                mysqli_free_result($result);
 
-                            <?php    
+                ?>
+            </div>
+        </div></br></br></br>
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                //Lista de usuarios
+                    if (isset($_POST['usuarios']))
+                    {
+                        echo '<legend><i class="fa fa-bar-chart"></i> Usuarios Registrados</legend>';
+                        $sql = 'SELECT nombre, apellido, username, fecha_registro FROM users WHERE 1=1';
+                        if(isset($_POST['fechaDesde']))
+                        {
+                            if($_POST['fechaDesde'] != '')
+                            {
+                                $sql .= ' AND fecha_registro >= "'.$_POST['fechaDesde'].'"';
+                            }
+                        }
+                         if(isset($_POST['fechaHasta']))
+                        {
+                            if($_POST['fechaHasta'] != '')
+                            {
+                                $sql .= ' AND fecha_registro <= "'.$_POST['fechaHasta'].'"';
+                            }
+                        }
+                        $result = mysqli_query($con,$sql);
+                        if (mysqli_num_rows($result) > 0)                           
+                        {
+                            echo '<table class="table table-striped table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>Nombre</th>
+                                      <th>Apellido</th>
+                                      <th>User Name</th>
+                                      <th>Fecha de Registro</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>'; 
+                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+                            {
+                                echo '<tr>
+                                    <td>'.utf8_encode($row['nombre']).'</td>
+                                    <td>'.utf8_encode($row['apellido']).'</td>
+                                    <td>'.$row['username'].'</td>
+                                    <td>'.$row['fecha_registro'].'</td>
+                                    </tr>';
+                            }
+                             echo "</tbody></table>";
+                        }
+                        mysqli_free_result($result);
+                    }
+                    else
+                    {
+                        if (isset($_POST['publicados']))
+                        {
+                            echo '<legend><i class="fa fa-bar-chart"></i> Productos Publicados</legend>';
+                            $sql = 'SELECT titulo, activo FROM productos WHERE 1=1';
+                            if(isset($_POST['fechaDesde']))
+                            {
+                                if($_POST['fechaDesde'] != '')
+                                {
+                                    $sql .= ' AND fecha_publicacion >= "'.$_POST['fechaDesde'].'"';
+                                }
+                            }
+                             if(isset($_POST['fechaHasta']))
+                            {
+                                if($_POST['fechaHasta'] != '')
+                                {
+                                    $sql .= ' AND fecha_publicacion <= "'.$_POST['fechaHasta'].'"';
+                                }
+                            }
+                            $result = mysqli_query($con,$sql);
+                            if (mysqli_num_rows($result) > 0)                           
+                            {
+                                echo '<table class="table table-striped table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th>Producto</th>
+                                          <th>Activo</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>'; 
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+                                {
+                                    echo '<tr>
+                                            <td>'.utf8_encode($row['titulo']).'</td>';
+                                    if($row['activo'] == 1)
+                                    {
+                                        echo '<td><i class="fa fa-check text-success"></i></td></tr>';
+                                    }else{
+                                        echo '<td><i class="fa fa-times text-danger"></i></td></tr>';
+                                    }
 
+                                }
+                                echo "</tbody></table>";
+                            }
+                            mysqli_free_result($result);
+                        }
+                        else
+                        {
+                            if (isset($_POST['vendidos']))
+                            {
+                                echo '<legend><i class="fa fa-bar-chart"></i> Productos Vendidos</legend>';
+                                $sql = 'SELECT titulo, id_vendedor, id, fecha_publicacion, fecha_fin FROM productos WHERE vendido=1';
+                                if(isset($_POST['fechaDesde']))
+                                {
+                                    if($_POST['fechaDesde'] != '')
+                                    {
+                                        $sql .= ' AND fecha_fin >= "'.$_POST['fechaDesde'].'"';
+                                    }
+                                }
+                                 if(isset($_POST['fechaHasta']))
+                                {
+                                    if($_POST['fechaHasta'] != '')
+                                    {
+                                        $sql .= ' AND fecha_fin <= "'.$_POST['fechaHasta'].'"';
+                                    }
+                                }
+                                $result = mysqli_query($con,$sql);
                                 if (mysqli_num_rows($result) > 0)                           
                                 {
-                                    $rowUsers = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                                   
-                                    
+                                    echo '<table class="table table-striped table-hover">
+                                          <thead>
+                                            <tr>
+                                              <th>Producto</th>
+                                              <th>Vendedor</th>
+                                              <th>Comprador</th>
+                                              <th>Fecha de Publicación</th>
+                                              <th>Fecha de Finalización</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>'; 
+                                    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+                                    {
+                                        
+                                        $query = 'SELECT u.username FROM users u INNER JOIN ofertas_realizadas o ON (u.id = o.id_usuario) WHERE o.id_producto = '.$row['id'].' AND o.es_ganador = 1';
+                                        $resultComprador = mysqli_query($con,$query);
+                                        if (mysqli_num_rows($resultComprador) > 0)                           
+                                        {
+                                            $rowComprador = mysqli_fetch_array($resultComprador, MYSQLI_ASSOC);
+                                            $comprador = $rowComprador['username'];
+                                        }else{
+                                            $comprador = '<i class="fa fa-minus text-danger"></i>';
+                                        }
+                                        mysqli_free_result($resultComprador);
 
-                                    echo '<legend>Cantidad de Usuarios Registrados</legend>
-                                          <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Usuarios Registrados: '.$rowUsers['cantUsers'].'</p>
-                                            </br></br>
-                                          </div>';
-                            
+                                        $query = 'SELECT u.username FROM users u INNER JOIN productos p ON (u.id = p.id_vendedor) WHERE p.id = '.$row['id'];
+                                        $resultVendedor = mysqli_query($con,$query);
+                                        if (mysqli_num_rows($resultVendedor) > 0)                           
+                                        {
+                                            $rowVendedor = mysqli_fetch_array($resultVendedor, MYSQLI_ASSOC);
+                                            $vendedor = $rowVendedor['username'];
+                                        }else{
+                                            $vendedor = '<i class="fa fa-minus text-danger"></i>';
+                                        }
+                                        mysqli_free_result($resultVendedor);
+
+                                        echo '<tr>
+                                                <td>'.utf8_encode($row['titulo']).'</td>
+                                                <td>'.$vendedor.'</td>
+                                                <td>'.$comprador.'</td>
+                                                <td>'.$row['fecha_publicacion'].'</td>
+                                                <td>'.$row['fecha_fin'].'</td>';
+                                    }
+                                    echo "</tbody></table>";
                                 }
-                                /*
-                                else
-                                {
-                                    echo '<legend>Cantidad de Usuarios Registrados </legend>
-                                          <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total de Usuarios Registrados: '.$UserTotal.'</p>
-                                            </br></br>
-                                          </div>';
-                                }
-                                */
                                 mysqli_free_result($result);
-
-                                //PUBLICACIONES ACTIVAS
-                                $sql = 'SELECT COUNT(*) AS totPublicaciones FROM productos WHERE fecha_publicacion >="'.$initDate.'"';
-                                $result = mysqli_query($con,$sql);
-                                 if (mysqli_num_rows($result) > 0)                           
-                                {
-                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                                    echo '<legend>Cantidad de Publicaciones Realizadas</legend>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Publicaciones Realizadas: '.$row['totPublicaciones'].'</p>
-                                            </br></br>
-                                          </div>';
-                            
-                                }
-                                /*
-                                else
-                                {
-                                    echo '<legend>Cantidad de Publicaciones Realizadas </legend>
-                                          <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total de Publicaciones Realizadas: '.$PublicacionesActivas.'</p>
-                                            </br></br>
-                                          </div>';
-                                }
-                                */
-                                mysqli_free_result($result);
-
-                                //PUBLICACIONES VENDIDAS
-                                 $sql = 'SELECT COUNT(*) AS totPub FROM productos WHERE fecha_publicacion >="'.$initDate.'" AND fecha_fin <="'.$endDate.'" AND vendido = 1';
-                                 $result = mysqli_query($con,$sql);
-                                 if (mysqli_num_rows($result) > 0)                           
-                                {
-                                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-                                    echo '<legend>Cantidad de Productos Vendidos</legend>
-                                        <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#d9230f" class="fa fa-square "></i> Cantidad de Productos Vendidos: '.$row['totPub'].'</p>
-                                            </br></br>
-                                          </div>';
-                                }
-                                /*
-                                else
-                                {
-                                    echo '<legend>Cantidad de Publicaciones Activas </legend>
-                                          <div class="col-sm-10 col-sm-offset-1">
-                                            <p><i style="color:#469408" class="fa fa-square "></i> Cantidad Total Productos Vendidos: '.$PublicacionesVendidas.'</p>
-                                            </br></br>
-                                          </div>';
-                                }
-                                */
-                                mysqli_free_result($result);
-
-                            ?>
-                           
-                        
-                        </div>
-                    </div>
-                </div>
+                            }    
+                        }
+                    }
+                ?>
             </div>
-         </div>
-         <?php
-            
-        
+        </div>
+        <?php
+            }
+            else
+            {
+                echo '<script type="text/javascript"> window.location = "index.php"</script>';
+            }
         ?>
+    </div>
+
+
+
     </div>
 </body>
 </html>
